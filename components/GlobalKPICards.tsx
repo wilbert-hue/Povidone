@@ -150,7 +150,7 @@ export function GlobalKPICards() {
     const marketName = data.metadata.market_name || 'Global Market'
 
     const geographyLabel = actualSelectedGeographies.length === 0
-      ? `Global ${marketName}`
+      ? `U.S. ${marketName}`
       : actualSelectedGeographies.length === 1
       ? `${actualSelectedGeographies[0]} ${marketName}`
       : `${actualSelectedGeographies.length} Geographies ${marketName}`

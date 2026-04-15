@@ -4,101 +4,91 @@ const path = require('path');
 // Years: 2021-2033
 const years = [2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030, 2031, 2032, 2033];
 
-// Geographies with their region grouping
+// Geography: United States only, with sub-regions
 const regions = {
-  "North America": ["U.S.", "Canada"],
-  "Europe": ["U.K.", "Germany", "Italy", "France", "Spain", "Russia", "Rest of Europe"],
-  "Asia Pacific": ["China", "India", "Japan", "South Korea", "ASEAN", "Australia", "Rest of Asia Pacific"],
-  "Latin America": ["Brazil", "Argentina", "Mexico", "Rest of Latin America"],
-  "Middle East & Africa": ["GCC", "South Africa", "Rest of Middle East & Africa"]
+  "United States": ["Northeast", "Midwest", "South", "Southwest", "West"]
 };
 
 // New segment definitions with market share splits (proportions within each segment type)
 const segmentTypes = {
-  "By Type": {
-    "Sub-Normothermic Perfusion (20–34°C)": 0.55,
-    "Warm or Normothermic Perfusion (35–37°C)": 0.45
+  "By Prescription Type": {
+    "Prescription (Rx)": 0.58,
+    "Over-the-Counter (OTC)": 0.42
   },
-  "By Organ Type": {
-    "Liver": 0.35,
-    "Heart": 0.22,
-    "Lung": 0.18,
-    "Kidney": 0.15,
-    "Others (Pancreas, Small bowel / Intestine, Composite Tissues / Limb Perfusion (emerging use cases))": 0.10
+  "By Indication": {
+    "Allergic Rhinitis": 0.28,
+    "Non-Allergic Rhinitis": 0.18,
+    "Chronic Rhinosinusitis / Sinusitis": 0.20,
+    "Nasal Congestion (Cold / Flu)": 0.16,
+    "Infection Prevention / Antiviral Protection": 0.12,
+    "Other Indications (Pre/Post-Operative Nasal Antisepsis, among others)": 0.06
   },
-  "Application / Use Case": {
-    "Organ Preservation": 0.30,
-    "Viability Assessment": 0.25,
-    "Physiologic Transport": 0.20,
-    "Reconditioning Marginal Organs": 0.15,
-    "Others (Research Use / Protocol development)": 0.10
+  "By Distribution Channel": {
+    "Retail Pharmacies": 0.38,
+    "Hospital Pharmacies": 0.28,
+    "Online Pharmacies": 0.20,
+    "Supermarkets & Hypermarkets": 0.14
   },
   "By End User": {
-    "Hospitals & Clinics": 0.40,
-    "Specialty Clinic/Centers": 0.25,
-    "Transplant Centers": 0.25,
-    "Others (Research Institutes/Centers, Organ Procurement Organizations, etc.)": 0.10
+    "Hospitals": 0.35,
+    "Ambulatory Surgical Centers": 0.25,
+    "ENT Clinics": 0.28,
+    "Others (Long-term Care Facilities, Homecare Settings, among others)": 0.12
   }
 };
 
-// Regional base values (USD Million) for 2021 - total market per region
-// Global Normothermic Machine Perfusion market ~$300M in 2021, growing ~12% CAGR
+// Base values (USD Million) for 2021 - total US market
+// US Povidone-Iodine nasal spray market ~$280M in 2021, growing ~7.5% CAGR
 const regionBaseValues = {
-  "North America": 120,
-  "Europe": 90,
-  "Asia Pacific": 50,
-  "Latin America": 20,
-  "Middle East & Africa": 15
+  "United States": 280
 };
 
-// Country share within region (must sum to ~1.0)
+// Sub-region share within United States (must sum to ~1.0)
 const countryShares = {
-  "North America": { "U.S.": 0.82, "Canada": 0.18 },
-  "Europe": { "U.K.": 0.18, "Germany": 0.22, "Italy": 0.12, "France": 0.16, "Spain": 0.10, "Russia": 0.08, "Rest of Europe": 0.14 },
-  "Asia Pacific": { "China": 0.28, "India": 0.12, "Japan": 0.25, "South Korea": 0.12, "ASEAN": 0.10, "Australia": 0.07, "Rest of Asia Pacific": 0.06 },
-  "Latin America": { "Brazil": 0.45, "Argentina": 0.15, "Mexico": 0.25, "Rest of Latin America": 0.15 },
-  "Middle East & Africa": { "GCC": 0.45, "South Africa": 0.25, "Rest of Middle East & Africa": 0.30 }
-};
-
-// Growth rates (CAGR) per region - slightly different for variety
-const regionGrowthRates = {
-  "North America": 0.115,
-  "Europe": 0.108,
-  "Asia Pacific": 0.145,
-  "Latin America": 0.125,
-  "Middle East & Africa": 0.118
-};
-
-// Segment-specific growth multipliers (relative to regional base CAGR)
-const segmentGrowthMultipliers = {
-  "By Type": {
-    "Sub-Normothermic Perfusion (20–34°C)": 0.95,
-    "Warm or Normothermic Perfusion (35–37°C)": 1.07
-  },
-  "By Organ Type": {
-    "Liver": 1.08,
-    "Heart": 1.05,
-    "Lung": 1.12,
-    "Kidney": 0.95,
-    "Others (Pancreas, Small bowel / Intestine, Composite Tissues / Limb Perfusion (emerging use cases))": 1.20
-  },
-  "Application / Use Case": {
-    "Organ Preservation": 0.92,
-    "Viability Assessment": 1.15,
-    "Physiologic Transport": 1.05,
-    "Reconditioning Marginal Organs": 1.18,
-    "Others (Research Use / Protocol development)": 1.10
-  },
-  "By End User": {
-    "Hospitals & Clinics": 0.98,
-    "Specialty Clinic/Centers": 1.10,
-    "Transplant Centers": 1.08,
-    "Others (Research Institutes/Centers, Organ Procurement Organizations, etc.)": 1.05
+  "United States": {
+    "Northeast": 0.22,
+    "Midwest": 0.20,
+    "South": 0.35,
+    "Southwest": 0.12,
+    "West": 0.11
   }
 };
 
-// Volume multiplier: units per USD Million (rough: ~500 units per $1M for perfusion devices)
-const volumePerMillionUSD = 480;
+// Growth rates (CAGR) per geography
+const regionGrowthRates = {
+  "United States": 0.075
+};
+
+// Segment-specific growth multipliers (relative to base CAGR)
+const segmentGrowthMultipliers = {
+  "By Prescription Type": {
+    "Prescription (Rx)": 0.92,
+    "Over-the-Counter (OTC)": 1.10
+  },
+  "By Indication": {
+    "Allergic Rhinitis": 1.05,
+    "Non-Allergic Rhinitis": 0.98,
+    "Chronic Rhinosinusitis / Sinusitis": 1.08,
+    "Nasal Congestion (Cold / Flu)": 0.95,
+    "Infection Prevention / Antiviral Protection": 1.25,
+    "Other Indications (Pre/Post-Operative Nasal Antisepsis, among others)": 1.12
+  },
+  "By Distribution Channel": {
+    "Retail Pharmacies": 0.90,
+    "Hospital Pharmacies": 1.02,
+    "Online Pharmacies": 1.35,
+    "Supermarkets & Hypermarkets": 0.85
+  },
+  "By End User": {
+    "Hospitals": 1.00,
+    "Ambulatory Surgical Centers": 1.12,
+    "ENT Clinics": 1.08,
+    "Others (Long-term Care Facilities, Homecare Settings, among others)": 1.05
+  }
+};
+
+// Volume multiplier: units per USD Million (rough: ~2000 units per $1M for nasal spray products)
+const volumePerMillionUSD = 2000;
 
 // Seeded pseudo-random for reproducibility
 let seed = 42;
@@ -134,12 +124,11 @@ function generateData(isVolume) {
   const roundFn = isVolume ? roundToInt : roundTo1;
   const multiplier = isVolume ? volumePerMillionUSD : 1;
 
-  // Generate data for each region and country
-  for (const [regionName, countries] of Object.entries(regions)) {
+  for (const [regionName, subRegions] of Object.entries(regions)) {
     const regionBase = regionBaseValues[regionName] * multiplier;
     const regionGrowth = regionGrowthRates[regionName];
 
-    // Region-level data
+    // Top-level geography data (United States)
     data[regionName] = {};
     for (const [segType, segments] of Object.entries(segmentTypes)) {
       data[regionName][segType] = {};
@@ -150,33 +139,31 @@ function generateData(isVolume) {
       }
     }
 
-    // Add "By Country" for each region
-    data[regionName]["By Country"] = {};
-    for (const country of countries) {
-      const cShare = countryShares[regionName][country];
-      // Use a slight variation of region growth per country
-      const countryGrowthVariation = 1 + (seededRandom() - 0.5) * 0.06;
-      const countryBase = regionBase * cShare;
-      const countryGrowth = regionGrowth * countryGrowthVariation;
-      data[regionName]["By Country"][country] = generateTimeSeries(countryBase, countryGrowth, roundFn);
+    // Add "By Region" for United States showing sub-regions
+    data[regionName]["By Region"] = {};
+    for (const subRegion of subRegions) {
+      const sShare = countryShares[regionName][subRegion];
+      const subRegionGrowthVariation = 1 + (seededRandom() - 0.5) * 0.06;
+      const subRegionBase = regionBase * sShare;
+      const subRegionGrowth = regionGrowth * subRegionGrowthVariation;
+      data[regionName]["By Region"][subRegion] = generateTimeSeries(subRegionBase, subRegionGrowth, roundFn);
     }
 
-    // Country-level data
-    for (const country of countries) {
-      const cShare = countryShares[regionName][country];
-      const countryBase = regionBase * cShare;
-      const countryGrowthVariation = 1 + (seededRandom() - 0.5) * 0.04;
-      const countryGrowth = regionGrowth * countryGrowthVariation;
+    // Sub-region level data
+    for (const subRegion of subRegions) {
+      const sShare = countryShares[regionName][subRegion];
+      const subRegionBase = regionBase * sShare;
+      const subRegionGrowthVariation = 1 + (seededRandom() - 0.5) * 0.04;
+      const subRegionGrowth = regionGrowth * subRegionGrowthVariation;
 
-      data[country] = {};
+      data[subRegion] = {};
       for (const [segType, segments] of Object.entries(segmentTypes)) {
-        data[country][segType] = {};
+        data[subRegion][segType] = {};
         for (const [segName, share] of Object.entries(segments)) {
-          const segGrowth = countryGrowth * segmentGrowthMultipliers[segType][segName];
-          const segBase = countryBase * share;
-          // Add slight country-specific variation to segment share
+          const segGrowth = subRegionGrowth * segmentGrowthMultipliers[segType][segName];
+          const segBase = subRegionBase * share;
           const shareVariation = 1 + (seededRandom() - 0.5) * 0.1;
-          data[country][segType][segName] = generateTimeSeries(segBase * shareVariation, segGrowth, roundFn);
+          data[subRegion][segType][segName] = generateTimeSeries(segBase * shareVariation, segGrowth, roundFn);
         }
       }
     }
@@ -199,5 +186,5 @@ fs.writeFileSync(path.join(outDir, 'volume.json'), JSON.stringify(volumeData, nu
 console.log('Generated value.json and volume.json successfully');
 console.log('Value geographies:', Object.keys(valueData).length);
 console.log('Volume geographies:', Object.keys(volumeData).length);
-console.log('Segment types:', Object.keys(valueData['North America']));
-console.log('Sample - North America, By Type:', JSON.stringify(valueData['North America']['By Type'], null, 2));
+console.log('Segment types:', Object.keys(valueData['United States']));
+console.log('Sample - United States, By Prescription Type:', JSON.stringify(valueData['United States']['By Prescription Type'], null, 2));

@@ -255,11 +255,7 @@ export function filterData(
     if (!geoMatch) {
       // Use dynamic region-to-country mapping from data if available, with fallback
       const regionToCountriesMap: Record<string, string[]> = geographyCountries || {
-        'North America': ['U.S.', 'Canada'],
-        'Europe': ['U.K.', 'Germany', 'Italy', 'France', 'Spain', 'Russia', 'Rest of Europe'],
-        'Asia Pacific': ['China', 'India', 'Japan', 'South Korea', 'ASEAN', 'Australia', 'Rest of Asia Pacific'],
-        'Latin America': ['Brazil', 'Argentina', 'Mexico', 'Rest of Latin America'],
-        'Middle East & Africa': ['GCC', 'South Africa', 'Rest of Middle East & Africa']
+        'United States': ['Northeast', 'Midwest', 'South', 'Southwest', 'West']
       }
 
       // If a region is selected and this record is a country in that region, include it
@@ -377,7 +373,7 @@ export function filterData(
         // Leaf record - include it unless its parent is already included as an aggregated record
         if (selectedLevel1Segments.length > 0) {
           if (isRegionalSegmentType) {
-            const regionalGeographies = ['North America', 'Europe', 'Asia Pacific', 'Latin America', 'Middle East & Africa', 'Middle East', 'Africa', 'ASEAN', 'SAARC Region', 'CIS Region', 'Global']
+            const regionalGeographies = ['United States', 'North America', 'Europe', 'Asia Pacific', 'Latin America', 'Middle East & Africa', 'Middle East', 'Africa', 'ASEAN', 'SAARC Region', 'CIS Region', 'Global']
             const selectedAreGeographies = selectedLevel1Segments.some(seg => regionalGeographies.includes(seg))
             const selectedAreSegments = selectedLevel1Segments.some(seg => !regionalGeographies.includes(seg))
 
@@ -969,11 +965,7 @@ export function prepareGroupedBarData(
 
         // Region to countries mapping for parent geography aggregation
         const regionToCountriesStacked: Record<string, string[]> = {
-          'North America': ['U.S.', 'Canada'],
-          'Europe': ['U.K.', 'Germany', 'Italy', 'France', 'Spain', 'Russia', 'Rest of Europe'],
-          'Asia Pacific': ['China', 'India', 'Japan', 'South Korea', 'ASEAN', 'Australia', 'Rest of Asia Pacific'],
-          'Latin America': ['Brazil', 'Argentina', 'Mexico', 'Rest of Latin America'],
-          'Middle East & Africa': ['GCC', 'South Africa', 'Rest of Middle East & Africa']
+          'United States': ['Northeast', 'Midwest', 'South', 'Southwest', 'West']
         }
 
         records.forEach(record => {
@@ -1071,11 +1063,7 @@ export function prepareGroupedBarData(
           // In geography mode, aggregate child geographies under their parent
           // if the parent is selected (e.g., U.S. + Canada data shown as "North America")
           const regionToCountries: Record<string, string[]> = {
-            'North America': ['U.S.', 'Canada'],
-            'Europe': ['U.K.', 'Germany', 'Italy', 'France', 'Spain', 'Russia', 'Rest of Europe'],
-            'Asia Pacific': ['China', 'India', 'Japan', 'South Korea', 'ASEAN', 'Australia', 'Rest of Asia Pacific'],
-            'Latin America': ['Brazil', 'Argentina', 'Mexico', 'Rest of Latin America'],
-            'Middle East & Africa': ['GCC', 'South Africa', 'Rest of Middle East & Africa']
+            'United States': ['Northeast', 'Midwest', 'South', 'Southwest', 'West']
           }
 
           // Check if this record's geography should be aggregated under a parent
@@ -1274,11 +1262,7 @@ export function prepareLineChartData(
         // Lines represent geographies (aggregate across segments)
         // Map child geographies to their parent if parent is selected
         const regionToCountriesLine: Record<string, string[]> = {
-          'North America': ['U.S.', 'Canada'],
-          'Europe': ['U.K.', 'Germany', 'Italy', 'France', 'Spain', 'Russia', 'Rest of Europe'],
-          'Asia Pacific': ['China', 'India', 'Japan', 'South Korea', 'ASEAN', 'Australia', 'Rest of Asia Pacific'],
-          'Latin America': ['Brazil', 'Argentina', 'Mexico', 'Rest of Latin America'],
-          'Middle East & Africa': ['GCC', 'South Africa', 'Rest of Middle East & Africa']
+          'United States': ['Northeast', 'Midwest', 'South', 'Southwest', 'West']
         }
 
         let mappedGeo = record.geography
@@ -1810,11 +1794,7 @@ export function prepareIntelligentMultiLevelData(
 
   // Region to countries mapping for geography-mode
   const regionToCountries: Record<string, string[]> = {
-    'North America': ['U.S.', 'Canada'],
-    'Europe': ['U.K.', 'Germany', 'Italy', 'France', 'Spain', 'Russia', 'Rest of Europe'],
-    'Asia Pacific': ['China', 'India', 'Japan', 'South Korea', 'ASEAN', 'Australia', 'Rest of Asia Pacific'],
-    'Latin America': ['Brazil', 'Argentina', 'Mexico', 'Rest of Latin America'],
-    'Middle East & Africa': ['GCC', 'South Africa', 'Rest of Middle East & Africa']
+    'United States': ['Northeast', 'Midwest', 'South', 'Southwest', 'West']
   }
 
   // Check if we need Global-to-geography mapping (for any non-Global geography selection)
@@ -1850,7 +1830,7 @@ export function prepareIntelligentMultiLevelData(
     // 1. Geography names (e.g., North America, Asia Pacific) - Level 1 selections
     // 2. Country/state names (e.g., U.S., Canada, Germany) - Level 2+ selections
     if (isRegionalSegmentType && hasExplicitLevel1Selection) {
-      const regionalGeographies = ['North America', 'Europe', 'Asia Pacific', 'Latin America', 'Middle East & Africa', 'Middle East', 'Africa', 'ASEAN', 'SAARC Region', 'CIS Region', 'Global']
+      const regionalGeographies = ['United States', 'North America', 'Europe', 'Asia Pacific', 'Latin America', 'Middle East & Africa', 'Middle East', 'Africa', 'ASEAN', 'SAARC Region', 'CIS Region', 'Global']
 
       // Check if selected segments are geography names or country/segment names
       const selectedAreGeographies = selectedLevel1Segments.some((seg: string) => regionalGeographies.includes(seg))
