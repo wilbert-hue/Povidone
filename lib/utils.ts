@@ -147,7 +147,8 @@ export function formatValueDataUnitLabel(
 }
 
 /**
- * KPI card number line for value: no "$" when unit is Thousands (shows "12,345.6 Thousands").
+ * KPI card number line for value: no "$" when unit is Thousands.
+ * Values are stored as USD thousands; show compact form (÷1000) e.g. 28,193 not 28,193,463.0.
  */
 export function formatKpiValueAmountLine(
   value: number,
@@ -157,19 +158,27 @@ export function formatKpiValueAmountLine(
   volumeUnit: string | undefined,
   decimals = 1
 ): string {
-  const formatted = value.toLocaleString('en-US', {
-    minimumFractionDigits: decimals,
-    maximumFractionDigits: decimals,
-  })
   if (dataType !== 'value') {
+    const formatted = value.toLocaleString('en-US', {
+      minimumFractionDigits: decimals,
+      maximumFractionDigits: decimals,
+    })
     return `${formatted} ${volumeUnit || 'Units'}`
   }
   if (currency === 'INR') {
     return `₹ ${formatIndianNumber(value)}`
   }
   if (isThousandsValueUnit(valueUnit)) {
-    return `${formatted} Thousands`
+    const compact = Math.round(value / 1000)
+    const compactFormatted = compact.toLocaleString('en-US', {
+      maximumFractionDigits: 0,
+    })
+    return `${compactFormatted} Thousands`
   }
+  const formatted = value.toLocaleString('en-US', {
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals,
+  })
   const u = (valueUnit || '').trim()
   return `$ ${formatted}${u ? ` ${u}` : ''}`
 }
