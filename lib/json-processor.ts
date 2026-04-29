@@ -1454,7 +1454,17 @@ export async function processJsonDataAsync(
         }
       }
     }
-    
+
+    // Source workbooks use USD Million; dashboard displays USD Thousands (1 M = 1,000 K)
+    const USD_MILLION_TO_THOUSANDS = 1000
+    for (const record of valueRecords) {
+      for (const year of allYears) {
+        if (record.time_series[year] !== undefined) {
+          record.time_series[year] *= USD_MILLION_TO_THOUSANDS
+        }
+      }
+    }
+
     // Calculate market share for each record
     const calculateMarketShare = (records: DataRecord[], year: number) => {
       const yearTotal = records.reduce((sum, r) => sum + (r.time_series[year] || 0), 0)
@@ -1472,7 +1482,7 @@ export async function processJsonDataAsync(
     
     // Build metadata
     const metadata: Metadata = {
-      market_name: 'U.S. Povidone Iodine Market',
+      market_name: 'U.S. Povidone Iodine Nasal Spray Market',
       market_type: 'Market Analysis',
       industry: 'Healthcare & Pharmaceuticals',
       years: allYears,
@@ -1482,7 +1492,7 @@ export async function processJsonDataAsync(
       historical_years: allYears.filter(y => y <= historicalEndYear),
       forecast_years: allYears.filter(y => y > historicalEndYear),
       currency: 'USD',
-      value_unit: 'Million',
+      value_unit: 'Thousands',
       volume_unit: 'Million Units',
       has_value: valueRecords.length > 0,
       has_volume: volumeRecords.length > 0,

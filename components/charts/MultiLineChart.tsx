@@ -147,7 +147,7 @@ export function MultiLineChart({ title, height = 400 }: MultiLineChartProps) {
   const selectedCurrency = currency || data.metadata.currency || 'USD'
   const isINR = selectedCurrency === 'INR'
   const currencySymbol = isINR ? '₹' : '$'
-  const unitLabel = isINR ? '' : (data.metadata.value_unit || 'Million')
+  const unitLabel = isINR ? '' : (data.metadata.value_unit || 'Thousands')
   
   const yAxisLabel = filters.dataType === 'value'
     ? isINR 
@@ -201,7 +201,7 @@ export function MultiLineChart({ title, height = 400 }: MultiLineChartProps) {
                 const selectedCurrency = currency || data.metadata.currency || 'USD'
                 const isINR = selectedCurrency === 'INR'
                 const currencySymbol = isINR ? '₹' : '$'
-                const unitText = isINR ? '' : (data.metadata.value_unit || 'Million')
+                const unitText = isINR ? '' : (data.metadata.value_unit || 'Thousands')
                 
                 const unit = filters.dataType === 'value'
                   ? isINR 
