@@ -15,6 +15,7 @@ import {
 import { CHART_THEME, getChartColor } from '@/lib/chart-theme'
 import { filterData, prepareWaterfallData } from '@/lib/data-processor'
 import { useDashboardStore } from '@/lib/store'
+import { formatMarketValueChartTitle, formatValueDataUnitLabel } from '@/lib/utils'
 
 interface WaterfallChartProps {
   title?: string
@@ -121,17 +122,31 @@ export function WaterfallChart({ title, height = 400 }: WaterfallChartProps) {
     )
   }
 
-  const yAxisLabel = filters.dataType === 'value'
-    ? `Market Value (${data.metadata.currency} ${data.metadata.value_unit})`
-    : `Market Volume (${data.metadata.volume_unit})`
+  const selectedCurrency = data.metadata.currency || 'USD'
+  const isINR = selectedCurrency === 'INR'
+  const currencySymbol = isINR ? '₹' : '$'
+
+  const yAxisLabel = formatMarketValueChartTitle('Market Value', {
+    dataType: filters.dataType,
+    isINR,
+    currency: selectedCurrency,
+    currencySymbol,
+    valueUnit: data.metadata.value_unit,
+    volumeUnit: data.metadata.volume_unit,
+  })
 
   // Custom tooltip for waterfall
   const CustomTooltip = ({ active, payload }: any) => {
     if (active && payload && payload.length && data) {
       const pointData = payload[0].payload as WaterfallDataPoint
-      const unit = filters.dataType === 'value'
-        ? `${data.metadata.currency} ${data.metadata.value_unit}`
-        : data.metadata.volume_unit
+      const unit = formatValueDataUnitLabel(
+        filters.dataType,
+        isINR,
+        selectedCurrency,
+        data.metadata.value_unit,
+        data.metadata.volume_unit,
+        currencySymbol,
+      )
       
       return (
         <div className="bg-white p-4 border border-gray-200 rounded-lg shadow-lg min-w-[280px]">

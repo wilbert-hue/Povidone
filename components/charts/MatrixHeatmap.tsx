@@ -3,6 +3,7 @@
 import { useMemo, useState } from 'react'
 import { useDashboardStore } from '@/lib/store'
 import { filterData } from '@/lib/data-processor'
+import { formatValueDataUnitLabel, getCurrencySymbol } from '@/lib/utils'
 
 interface MatrixHeatmapProps {
   title?: string
@@ -163,9 +164,15 @@ export function MatrixHeatmap({ title, height = 600 }: MatrixHeatmapProps) {
   }
 
   const [startYear, endYear] = filters.yearRange
-  const valueUnit = filters.dataType === 'value' 
-    ? `${data.metadata.currency} ${data.metadata.value_unit}`
-    : data.metadata.volume_unit
+  const cur = (data.metadata.currency || 'USD') as 'USD' | 'INR'
+  const valueUnit = formatValueDataUnitLabel(
+    filters.dataType,
+    cur === 'INR',
+    data.metadata.currency || 'USD',
+    data.metadata.value_unit,
+    data.metadata.volume_unit,
+    getCurrencySymbol(cur),
+  )
 
   return (
     <div className="w-full">

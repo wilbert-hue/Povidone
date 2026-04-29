@@ -3,7 +3,7 @@
 import { useMemo } from 'react'
 import { useDashboardStore } from '@/lib/store'
 import { TrendingUp, DollarSign, Calendar, Activity } from 'lucide-react'
-import { formatIndianNumber, formatIndianNumberWithCommas, formatCurrencyValue } from '@/lib/utils'
+import { formatKpiValueAmountLine, isThousandsValueUnit } from '@/lib/utils'
 
 export function GlobalKPICards() {
   const { data, filters, currency } = useDashboardStore()
@@ -200,6 +200,8 @@ export function GlobalKPICards() {
             <div className="p-1.5 bg-blue-100 rounded">
               {kpiData.currency === 'INR' ? (
                 <span className="text-blue-600 font-bold text-lg">₹</span>
+              ) : kpiData.dataType === 'value' && isThousandsValueUnit(kpiData.unit) ? (
+                <span className="text-blue-600 font-bold text-xs leading-tight text-center px-0.5">K</span>
               ) : (
                 <DollarSign className="h-4 w-4 text-blue-600" />
               )}
@@ -209,11 +211,13 @@ export function GlobalKPICards() {
                 {kpiData.dataTypeLabel} {kpiData.startYear}
               </p>
               <p className="text-base font-bold text-black leading-tight">
-                {kpiData.dataType === 'value' && kpiData.isINR
-                  ? `₹ ${formatIndianNumber(kpiData.marketSizeStart)}`
-                  : kpiData.dataType === 'value'
-                  ? `$ ${kpiData.marketSizeStart.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })} ${kpiData.unit}`
-                  : `${kpiData.marketSizeStart.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })} ${kpiData.unit}`}
+                {formatKpiValueAmountLine(
+                  kpiData.marketSizeStart,
+                  kpiData.currency as 'USD' | 'INR',
+                  kpiData.dataType === 'value' && !kpiData.isINR ? kpiData.unit : undefined,
+                  kpiData.dataType,
+                  kpiData.dataType === 'volume' ? kpiData.unit : undefined,
+                )}
               </p>
             </div>
           </div>
@@ -228,11 +232,13 @@ export function GlobalKPICards() {
                 {kpiData.dataTypeLabel} {kpiData.endYear}
               </p>
               <p className="text-base font-bold text-black leading-tight">
-                {kpiData.dataType === 'value' && kpiData.isINR
-                  ? `₹ ${formatIndianNumber(kpiData.marketSizeEnd)}`
-                  : kpiData.dataType === 'value'
-                  ? `$ ${kpiData.marketSizeEnd.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })} ${kpiData.unit}`
-                  : `${kpiData.marketSizeEnd.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })} ${kpiData.unit}`}
+                {formatKpiValueAmountLine(
+                  kpiData.marketSizeEnd,
+                  kpiData.currency as 'USD' | 'INR',
+                  kpiData.dataType === 'value' && !kpiData.isINR ? kpiData.unit : undefined,
+                  kpiData.dataType,
+                  kpiData.dataType === 'volume' ? kpiData.unit : undefined,
+                )}
               </p>
             </div>
           </div>
@@ -262,11 +268,13 @@ export function GlobalKPICards() {
                 Absolute Growth ({kpiData.startYear}-{kpiData.endYear})
               </p>
               <p className="text-base font-bold text-black leading-tight">
-                {kpiData.dataType === 'value' && kpiData.isINR
-                  ? `₹ ${formatIndianNumber(kpiData.absoluteGrowth)}`
-                  : kpiData.dataType === 'value'
-                  ? `$ ${kpiData.absoluteGrowth.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })} ${kpiData.unit}`
-                  : `${kpiData.absoluteGrowth.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 1 })} ${kpiData.unit}`}
+                {formatKpiValueAmountLine(
+                  kpiData.absoluteGrowth,
+                  kpiData.currency as 'USD' | 'INR',
+                  kpiData.dataType === 'value' && !kpiData.isINR ? kpiData.unit : undefined,
+                  kpiData.dataType,
+                  kpiData.dataType === 'volume' ? kpiData.unit : undefined,
+                )}
               </p>
               <p className="text-[10px] text-gray-600 mt-0.5">
                 +{kpiData.growthPercentage.toFixed(1)}% increase

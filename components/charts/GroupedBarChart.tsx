@@ -15,6 +15,7 @@ import { CHART_THEME, getChartColor, CHART_COLORS } from '@/lib/chart-theme'
 import { filterData, prepareGroupedBarData, prepareIntelligentMultiLevelData, getUniqueGeographies, getUniqueSegments, getGeographyProportions } from '@/lib/data-processor'
 import { useDashboardStore } from '@/lib/store'
 import type { DataRecord } from '@/lib/types'
+import { formatMarketValueChartTitle, formatValueDataUnitLabel } from '@/lib/utils'
 
 interface GroupedBarChartProps {
   title?: string
@@ -312,13 +313,15 @@ export function GroupedBarChart({ title, height = 400 }: GroupedBarChartProps) {
   const selectedCurrency = currency || data.metadata.currency || 'USD'
   const isINR = selectedCurrency === 'INR'
   const currencySymbol = isINR ? '₹' : '$'
-  const unitLabel = isINR ? '' : (data.metadata.value_unit || 'Thousands')
-  
-  const yAxisLabel = filters.dataType === 'value'
-    ? isINR 
-      ? `Market Value (${currencySymbol})`
-      : `Market Value (${selectedCurrency} ${unitLabel})`
-    : `Market Volume (${data.metadata.volume_unit})`
+
+  const yAxisLabel = formatMarketValueChartTitle('Market Value', {
+    dataType: filters.dataType,
+    isINR,
+    currency: selectedCurrency,
+    currencySymbol,
+    valueUnit: data.metadata.value_unit,
+    volumeUnit: data.metadata.volume_unit,
+  })
 
   // Matrix view should use heatmap instead
   if (filters.viewMode === 'matrix') {
@@ -345,12 +348,19 @@ export function GroupedBarChart({ title, height = 400 }: GroupedBarChartProps) {
     const selectedCurrency = currency || data.metadata.currency || 'USD'
     const isINR = selectedCurrency === 'INR'
     const currencySymbol = isINR ? '₹' : '$'
-    const unitText = isINR ? '' : (data.metadata.value_unit || 'Thousands')
-    
+    const unitText = formatValueDataUnitLabel(
+      filters.dataType,
+      isINR,
+      selectedCurrency,
+      data.metadata.value_unit,
+      data.metadata.volume_unit,
+      currencySymbol,
+    )
+
     const unit = filters.dataType === 'value'
-      ? isINR 
+      ? isINR
         ? currencySymbol
-        : `${selectedCurrency} ${unitText}`
+        : unitText
       : data.metadata.volume_unit
 
     if (chartData.isStacked) {

@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react'
 import { useDashboardStore } from '@/lib/store'
 import { filterData } from '@/lib/data-processor'
 import { ArrowUp, ArrowDown, Download } from 'lucide-react'
+import { formatValueDataUnitLabel, getCurrencySymbol } from '@/lib/utils'
 
 interface ComparisonTableProps {
   title?: string
@@ -149,9 +150,15 @@ export function ComparisonTable({ title, height = 600 }: ComparisonTableProps) {
   }
 
   const year = filters.yearRange[0] + Math.floor((filters.yearRange[1] - filters.yearRange[0]) / 2)
-  const valueUnit = filters.dataType === 'value' 
-    ? `${data.metadata.currency} ${data.metadata.value_unit}`
-    : data.metadata.volume_unit
+  const cur = (data.metadata.currency || 'USD') as 'USD' | 'INR'
+  const valueUnit = formatValueDataUnitLabel(
+    filters.dataType,
+    cur === 'INR',
+    data.metadata.currency || 'USD',
+    data.metadata.value_unit,
+    data.metadata.volume_unit,
+    getCurrencySymbol(cur),
+  )
 
   return (
     <div className="w-full min-w-0 overflow-hidden">

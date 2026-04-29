@@ -93,3 +93,84 @@ export function calculateGrowth(startValue: number, endValue: number): number {
   return ((endValue - startValue) / startValue) * 100
 }
 
+/** True when value_unit is thousands (USD implied elsewhere or omitted on purpose). */
+export function isThousandsValueUnit(valueUnit: string | undefined): boolean {
+  return (valueUnit || '').trim().toLowerCase() === 'thousands'
+}
+
+/**
+ * Chart axis title: e.g. Market size (Thousands) — not (USD Thousands).
+ */
+export function formatMarketValueChartTitle(
+  kind: 'Market Value' | 'Market Size',
+  opts: {
+    dataType: 'value' | 'volume'
+    isINR: boolean
+    currency: string
+    currencySymbol: string
+    valueUnit?: string
+    volumeUnit?: string
+  }
+): string {
+  const { dataType, isINR, currency, currencySymbol, valueUnit, volumeUnit } = opts
+  if (dataType !== 'value') {
+    return `Market Volume (${volumeUnit || 'Units'})`
+  }
+  if (isINR) {
+    return `${kind} (${currencySymbol})`
+  }
+  if (isThousandsValueUnit(valueUnit)) {
+    return `${kind} (Thousands)`
+  }
+  const u = (valueUnit || '').trim()
+  return u ? `${kind} (${currency} ${u})` : `${kind} (${currency})`
+}
+
+/**
+ * Tooltip / table suffix for value mode: Thousands only when applicable; INR uses symbol.
+ */
+export function formatValueDataUnitLabel(
+  dataType: 'value' | 'volume',
+  isINR: boolean,
+  currency: string,
+  valueUnit: string | undefined,
+  volumeUnit: string | undefined,
+  currencySymbol: string,
+): string {
+  if (dataType !== 'value') {
+    return volumeUnit || 'Units'
+  }
+  if (isINR) return currencySymbol
+  if (isThousandsValueUnit(valueUnit)) return 'Thousands'
+  const u = (valueUnit || '').trim()
+  return u ? `${currency} ${u}` : currency
+}
+
+/**
+ * KPI card number line for value: no "$" when unit is Thousands (shows "12,345.6 Thousands").
+ */
+export function formatKpiValueAmountLine(
+  value: number,
+  currency: 'USD' | 'INR',
+  valueUnit: string | undefined,
+  dataType: 'value' | 'volume',
+  volumeUnit: string | undefined,
+  decimals = 1
+): string {
+  const formatted = value.toLocaleString('en-US', {
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals,
+  })
+  if (dataType !== 'value') {
+    return `${formatted} ${volumeUnit || 'Units'}`
+  }
+  if (currency === 'INR') {
+    return `₹ ${formatIndianNumber(value)}`
+  }
+  if (isThousandsValueUnit(valueUnit)) {
+    return `${formatted} Thousands`
+  }
+  const u = (valueUnit || '').trim()
+  return `$ ${formatted}${u ? ` ${u}` : ''}`
+}
+

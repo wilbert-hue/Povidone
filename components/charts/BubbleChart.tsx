@@ -16,6 +16,7 @@ import { CHART_THEME, getChartColor } from '@/lib/chart-theme'
 import { filterData } from '@/lib/data-processor'
 import { useDashboardStore } from '@/lib/store'
 import type { DataRecord } from '@/lib/types'
+import { formatMarketValueChartTitle, formatValueDataUnitLabel, getCurrencySymbol } from '@/lib/utils'
 
 interface BubbleChartProps {
   title?: string
@@ -141,8 +142,19 @@ export function BubbleChart({ title, height = 500 }: BubbleChartProps) {
     // Sort by market size for better visualization
     bubbles.sort((a, b) => b.x - a.x)
 
+    const selectedCurrency = data.metadata.currency || 'USD'
+    const isINR = selectedCurrency === 'INR'
+    const currencySymbol = isINR ? '₹' : '$'
+
     const xLabel = filters.dataType === 'value'
-      ? `Market Size (${data.metadata.currency} ${data.metadata.value_unit})`
+      ? formatMarketValueChartTitle('Market Size', {
+          dataType: 'value',
+          isINR,
+          currency: selectedCurrency,
+          currencySymbol,
+          valueUnit: data.metadata.value_unit,
+          volumeUnit: data.metadata.volume_unit,
+        })
       : `Market Size (${data.metadata.volume_unit})`
     
     const yLabel = 'Market Share (%)'
@@ -173,9 +185,16 @@ export function BubbleChart({ title, height = 500 }: BubbleChartProps) {
         return null
       }
       
-      const unit = filters.dataType === 'value'
-        ? `${data.metadata.currency} ${data.metadata.value_unit}`
-        : data.metadata.volume_unit
+      const cur = (data.metadata.currency || 'USD') as 'USD' | 'INR'
+      const sym = getCurrencySymbol(cur)
+      const unit = formatValueDataUnitLabel(
+        filters.dataType,
+        cur === 'INR',
+        data.metadata.currency || 'USD',
+        data.metadata.value_unit,
+        data.metadata.volume_unit,
+        sym,
+      )
 
       return (
         <div className="bg-white p-4 border border-gray-200 rounded-lg shadow-lg min-w-[280px]">
