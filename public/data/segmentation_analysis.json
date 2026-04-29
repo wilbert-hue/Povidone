@@ -1,37 +1,1525 @@
 {
   "United States": {
     "By Prescription Type": {
-      "Prescription (Rx)": {},
-      "Over-the-Counter (OTC)": {}
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
     },
     "By Indication": {
-      "Allergic Rhinitis": {},
-      "Non-Allergic Rhinitis": {},
+      "Infection Prevention / Antiviral": {},
       "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
       "Nasal Congestion (Cold / Flu)": {},
-      "Infection Prevention / Antiviral Protection": {},
-      "Other Indications (Pre/Post-Operative Nasal Antisepsis, among others)": {}
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
     },
     "By Distribution Channel": {
+      "Online Pharmacies": {},
       "Retail Pharmacies": {},
       "Hospital Pharmacies": {},
-      "Online Pharmacies": {},
       "Supermarkets & Hypermarkets": {}
     },
     "By End User": {
       "Hospitals": {},
-      "Ambulatory Surgical Centers": {},
       "ENT Clinics": {},
-      "Others (Long-term Care Facilities, Homecare Settings, among others)": {}
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
     },
     "By Region": {
-      "United States": {
-        "Northeast": {},
-        "Midwest": {},
-        "South": {},
-        "Southwest": {},
-        "West": {}
-      }
+      "Northeast": {},
+      "Midwest": {},
+      "South": {},
+      "Southwest": {},
+      "West": {}
+    }
+  },
+  "Northeast": {
+    "By Prescription Type": {
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
+    },
+    "By Indication": {
+      "Infection Prevention / Antiviral": {},
+      "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
+      "Nasal Congestion (Cold / Flu)": {},
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
+    },
+    "By Distribution Channel": {
+      "Online Pharmacies": {},
+      "Retail Pharmacies": {},
+      "Hospital Pharmacies": {},
+      "Supermarkets & Hypermarkets": {}
+    },
+    "By End User": {
+      "Hospitals": {},
+      "ENT Clinics": {},
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
+    },
+    "By State": {
+      "Connecticut": {},
+      "Maine": {},
+      "Massachusetts": {},
+      "New Hampshire": {},
+      "Rhode Island": {},
+      "Vermont": {},
+      "New Jersey": {},
+      "New York": {},
+      "Pennsylvania": {}
+    }
+  },
+  "Connecticut": {
+    "By Prescription Type": {
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
+    },
+    "By Indication": {
+      "Infection Prevention / Antiviral": {},
+      "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
+      "Nasal Congestion (Cold / Flu)": {},
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
+    },
+    "By Distribution Channel": {
+      "Online Pharmacies": {},
+      "Retail Pharmacies": {},
+      "Hospital Pharmacies": {},
+      "Supermarkets & Hypermarkets": {}
+    },
+    "By End User": {
+      "Hospitals": {},
+      "ENT Clinics": {},
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
+    }
+  },
+  "Maine": {
+    "By Prescription Type": {
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
+    },
+    "By Indication": {
+      "Infection Prevention / Antiviral": {},
+      "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
+      "Nasal Congestion (Cold / Flu)": {},
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
+    },
+    "By Distribution Channel": {
+      "Online Pharmacies": {},
+      "Retail Pharmacies": {},
+      "Hospital Pharmacies": {},
+      "Supermarkets & Hypermarkets": {}
+    },
+    "By End User": {
+      "Hospitals": {},
+      "ENT Clinics": {},
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
+    }
+  },
+  "Massachusetts": {
+    "By Prescription Type": {
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
+    },
+    "By Indication": {
+      "Infection Prevention / Antiviral": {},
+      "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
+      "Nasal Congestion (Cold / Flu)": {},
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
+    },
+    "By Distribution Channel": {
+      "Online Pharmacies": {},
+      "Retail Pharmacies": {},
+      "Hospital Pharmacies": {},
+      "Supermarkets & Hypermarkets": {}
+    },
+    "By End User": {
+      "Hospitals": {},
+      "ENT Clinics": {},
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
+    }
+  },
+  "New Hampshire": {
+    "By Prescription Type": {
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
+    },
+    "By Indication": {
+      "Infection Prevention / Antiviral": {},
+      "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
+      "Nasal Congestion (Cold / Flu)": {},
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
+    },
+    "By Distribution Channel": {
+      "Online Pharmacies": {},
+      "Retail Pharmacies": {},
+      "Hospital Pharmacies": {},
+      "Supermarkets & Hypermarkets": {}
+    },
+    "By End User": {
+      "Hospitals": {},
+      "ENT Clinics": {},
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
+    }
+  },
+  "Rhode Island": {
+    "By Prescription Type": {
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
+    },
+    "By Indication": {
+      "Infection Prevention / Antiviral": {},
+      "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
+      "Nasal Congestion (Cold / Flu)": {},
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
+    },
+    "By Distribution Channel": {
+      "Online Pharmacies": {},
+      "Retail Pharmacies": {},
+      "Hospital Pharmacies": {},
+      "Supermarkets & Hypermarkets": {}
+    },
+    "By End User": {
+      "Hospitals": {},
+      "ENT Clinics": {},
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
+    }
+  },
+  "Vermont": {
+    "By Prescription Type": {
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
+    },
+    "By Indication": {
+      "Infection Prevention / Antiviral": {},
+      "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
+      "Nasal Congestion (Cold / Flu)": {},
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
+    },
+    "By Distribution Channel": {
+      "Online Pharmacies": {},
+      "Retail Pharmacies": {},
+      "Hospital Pharmacies": {},
+      "Supermarkets & Hypermarkets": {}
+    },
+    "By End User": {
+      "Hospitals": {},
+      "ENT Clinics": {},
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
+    }
+  },
+  "New Jersey": {
+    "By Prescription Type": {
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
+    },
+    "By Indication": {
+      "Infection Prevention / Antiviral": {},
+      "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
+      "Nasal Congestion (Cold / Flu)": {},
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
+    },
+    "By Distribution Channel": {
+      "Online Pharmacies": {},
+      "Retail Pharmacies": {},
+      "Hospital Pharmacies": {},
+      "Supermarkets & Hypermarkets": {}
+    },
+    "By End User": {
+      "Hospitals": {},
+      "ENT Clinics": {},
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
+    }
+  },
+  "New York": {
+    "By Prescription Type": {
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
+    },
+    "By Indication": {
+      "Infection Prevention / Antiviral": {},
+      "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
+      "Nasal Congestion (Cold / Flu)": {},
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
+    },
+    "By Distribution Channel": {
+      "Online Pharmacies": {},
+      "Retail Pharmacies": {},
+      "Hospital Pharmacies": {},
+      "Supermarkets & Hypermarkets": {}
+    },
+    "By End User": {
+      "Hospitals": {},
+      "ENT Clinics": {},
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
+    }
+  },
+  "Pennsylvania": {
+    "By Prescription Type": {
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
+    },
+    "By Indication": {
+      "Infection Prevention / Antiviral": {},
+      "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
+      "Nasal Congestion (Cold / Flu)": {},
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
+    },
+    "By Distribution Channel": {
+      "Online Pharmacies": {},
+      "Retail Pharmacies": {},
+      "Hospital Pharmacies": {},
+      "Supermarkets & Hypermarkets": {}
+    },
+    "By End User": {
+      "Hospitals": {},
+      "ENT Clinics": {},
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
+    }
+  },
+  "Midwest": {
+    "By Prescription Type": {
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
+    },
+    "By Indication": {
+      "Infection Prevention / Antiviral": {},
+      "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
+      "Nasal Congestion (Cold / Flu)": {},
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
+    },
+    "By Distribution Channel": {
+      "Online Pharmacies": {},
+      "Retail Pharmacies": {},
+      "Hospital Pharmacies": {},
+      "Supermarkets & Hypermarkets": {}
+    },
+    "By End User": {
+      "Hospitals": {},
+      "ENT Clinics": {},
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
+    },
+    "By State": {
+      "Illinois": {},
+      "Indiana": {},
+      "Iowa": {},
+      "Kansas": {},
+      "Michigan": {},
+      "Minnesota": {},
+      "Missouri": {},
+      "Nebraska": {},
+      "North Dakota": {},
+      "Ohio": {},
+      "South Dakota": {},
+      "Wisconsin": {}
+    }
+  },
+  "Illinois": {
+    "By Prescription Type": {
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
+    },
+    "By Indication": {
+      "Infection Prevention / Antiviral": {},
+      "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
+      "Nasal Congestion (Cold / Flu)": {},
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
+    },
+    "By Distribution Channel": {
+      "Online Pharmacies": {},
+      "Retail Pharmacies": {},
+      "Hospital Pharmacies": {},
+      "Supermarkets & Hypermarkets": {}
+    },
+    "By End User": {
+      "Hospitals": {},
+      "ENT Clinics": {},
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
+    }
+  },
+  "Indiana": {
+    "By Prescription Type": {
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
+    },
+    "By Indication": {
+      "Infection Prevention / Antiviral": {},
+      "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
+      "Nasal Congestion (Cold / Flu)": {},
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
+    },
+    "By Distribution Channel": {
+      "Online Pharmacies": {},
+      "Retail Pharmacies": {},
+      "Hospital Pharmacies": {},
+      "Supermarkets & Hypermarkets": {}
+    },
+    "By End User": {
+      "Hospitals": {},
+      "ENT Clinics": {},
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
+    }
+  },
+  "Iowa": {
+    "By Prescription Type": {
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
+    },
+    "By Indication": {
+      "Infection Prevention / Antiviral": {},
+      "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
+      "Nasal Congestion (Cold / Flu)": {},
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
+    },
+    "By Distribution Channel": {
+      "Online Pharmacies": {},
+      "Retail Pharmacies": {},
+      "Hospital Pharmacies": {},
+      "Supermarkets & Hypermarkets": {}
+    },
+    "By End User": {
+      "Hospitals": {},
+      "ENT Clinics": {},
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
+    }
+  },
+  "Kansas": {
+    "By Prescription Type": {
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
+    },
+    "By Indication": {
+      "Infection Prevention / Antiviral": {},
+      "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
+      "Nasal Congestion (Cold / Flu)": {},
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
+    },
+    "By Distribution Channel": {
+      "Online Pharmacies": {},
+      "Retail Pharmacies": {},
+      "Hospital Pharmacies": {},
+      "Supermarkets & Hypermarkets": {}
+    },
+    "By End User": {
+      "Hospitals": {},
+      "ENT Clinics": {},
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
+    }
+  },
+  "Michigan": {
+    "By Prescription Type": {
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
+    },
+    "By Indication": {
+      "Infection Prevention / Antiviral": {},
+      "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
+      "Nasal Congestion (Cold / Flu)": {},
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
+    },
+    "By Distribution Channel": {
+      "Online Pharmacies": {},
+      "Retail Pharmacies": {},
+      "Hospital Pharmacies": {},
+      "Supermarkets & Hypermarkets": {}
+    },
+    "By End User": {
+      "Hospitals": {},
+      "ENT Clinics": {},
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
+    }
+  },
+  "Minnesota": {
+    "By Prescription Type": {
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
+    },
+    "By Indication": {
+      "Infection Prevention / Antiviral": {},
+      "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
+      "Nasal Congestion (Cold / Flu)": {},
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
+    },
+    "By Distribution Channel": {
+      "Online Pharmacies": {},
+      "Retail Pharmacies": {},
+      "Hospital Pharmacies": {},
+      "Supermarkets & Hypermarkets": {}
+    },
+    "By End User": {
+      "Hospitals": {},
+      "ENT Clinics": {},
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
+    }
+  },
+  "Missouri": {
+    "By Prescription Type": {
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
+    },
+    "By Indication": {
+      "Infection Prevention / Antiviral": {},
+      "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
+      "Nasal Congestion (Cold / Flu)": {},
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
+    },
+    "By Distribution Channel": {
+      "Online Pharmacies": {},
+      "Retail Pharmacies": {},
+      "Hospital Pharmacies": {},
+      "Supermarkets & Hypermarkets": {}
+    },
+    "By End User": {
+      "Hospitals": {},
+      "ENT Clinics": {},
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
+    }
+  },
+  "Nebraska": {
+    "By Prescription Type": {
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
+    },
+    "By Indication": {
+      "Infection Prevention / Antiviral": {},
+      "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
+      "Nasal Congestion (Cold / Flu)": {},
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
+    },
+    "By Distribution Channel": {
+      "Online Pharmacies": {},
+      "Retail Pharmacies": {},
+      "Hospital Pharmacies": {},
+      "Supermarkets & Hypermarkets": {}
+    },
+    "By End User": {
+      "Hospitals": {},
+      "ENT Clinics": {},
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
+    }
+  },
+  "North Dakota": {
+    "By Prescription Type": {
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
+    },
+    "By Indication": {
+      "Infection Prevention / Antiviral": {},
+      "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
+      "Nasal Congestion (Cold / Flu)": {},
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
+    },
+    "By Distribution Channel": {
+      "Online Pharmacies": {},
+      "Retail Pharmacies": {},
+      "Hospital Pharmacies": {},
+      "Supermarkets & Hypermarkets": {}
+    },
+    "By End User": {
+      "Hospitals": {},
+      "ENT Clinics": {},
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
+    }
+  },
+  "Ohio": {
+    "By Prescription Type": {
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
+    },
+    "By Indication": {
+      "Infection Prevention / Antiviral": {},
+      "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
+      "Nasal Congestion (Cold / Flu)": {},
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
+    },
+    "By Distribution Channel": {
+      "Online Pharmacies": {},
+      "Retail Pharmacies": {},
+      "Hospital Pharmacies": {},
+      "Supermarkets & Hypermarkets": {}
+    },
+    "By End User": {
+      "Hospitals": {},
+      "ENT Clinics": {},
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
+    }
+  },
+  "South Dakota": {
+    "By Prescription Type": {
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
+    },
+    "By Indication": {
+      "Infection Prevention / Antiviral": {},
+      "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
+      "Nasal Congestion (Cold / Flu)": {},
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
+    },
+    "By Distribution Channel": {
+      "Online Pharmacies": {},
+      "Retail Pharmacies": {},
+      "Hospital Pharmacies": {},
+      "Supermarkets & Hypermarkets": {}
+    },
+    "By End User": {
+      "Hospitals": {},
+      "ENT Clinics": {},
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
+    }
+  },
+  "Wisconsin": {
+    "By Prescription Type": {
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
+    },
+    "By Indication": {
+      "Infection Prevention / Antiviral": {},
+      "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
+      "Nasal Congestion (Cold / Flu)": {},
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
+    },
+    "By Distribution Channel": {
+      "Online Pharmacies": {},
+      "Retail Pharmacies": {},
+      "Hospital Pharmacies": {},
+      "Supermarkets & Hypermarkets": {}
+    },
+    "By End User": {
+      "Hospitals": {},
+      "ENT Clinics": {},
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
+    }
+  },
+  "South": {
+    "By Prescription Type": {
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
+    },
+    "By Indication": {
+      "Infection Prevention / Antiviral": {},
+      "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
+      "Nasal Congestion (Cold / Flu)": {},
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
+    },
+    "By Distribution Channel": {
+      "Online Pharmacies": {},
+      "Retail Pharmacies": {},
+      "Hospital Pharmacies": {},
+      "Supermarkets & Hypermarkets": {}
+    },
+    "By End User": {
+      "Hospitals": {},
+      "ENT Clinics": {},
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
+    },
+    "By State": {
+      "Alabama": {},
+      "Arkansas": {},
+      "Delaware": {},
+      "Florida": {},
+      "Georgia": {},
+      "Kentucky": {},
+      "Louisiana": {},
+      "Maryland": {},
+      "Mississippi": {},
+      "North Carolina": {},
+      "Oklahoma": {},
+      "South Carolina": {},
+      "Tennessee": {},
+      "Texas": {},
+      "Virginia": {},
+      "West Virginia": {}
+    }
+  },
+  "Alabama": {
+    "By Prescription Type": {
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
+    },
+    "By Indication": {
+      "Infection Prevention / Antiviral": {},
+      "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
+      "Nasal Congestion (Cold / Flu)": {},
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
+    },
+    "By Distribution Channel": {
+      "Online Pharmacies": {},
+      "Retail Pharmacies": {},
+      "Hospital Pharmacies": {},
+      "Supermarkets & Hypermarkets": {}
+    },
+    "By End User": {
+      "Hospitals": {},
+      "ENT Clinics": {},
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
+    }
+  },
+  "Arkansas": {
+    "By Prescription Type": {
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
+    },
+    "By Indication": {
+      "Infection Prevention / Antiviral": {},
+      "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
+      "Nasal Congestion (Cold / Flu)": {},
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
+    },
+    "By Distribution Channel": {
+      "Online Pharmacies": {},
+      "Retail Pharmacies": {},
+      "Hospital Pharmacies": {},
+      "Supermarkets & Hypermarkets": {}
+    },
+    "By End User": {
+      "Hospitals": {},
+      "ENT Clinics": {},
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
+    }
+  },
+  "Delaware": {
+    "By Prescription Type": {
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
+    },
+    "By Indication": {
+      "Infection Prevention / Antiviral": {},
+      "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
+      "Nasal Congestion (Cold / Flu)": {},
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
+    },
+    "By Distribution Channel": {
+      "Online Pharmacies": {},
+      "Retail Pharmacies": {},
+      "Hospital Pharmacies": {},
+      "Supermarkets & Hypermarkets": {}
+    },
+    "By End User": {
+      "Hospitals": {},
+      "ENT Clinics": {},
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
+    }
+  },
+  "Florida": {
+    "By Prescription Type": {
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
+    },
+    "By Indication": {
+      "Infection Prevention / Antiviral": {},
+      "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
+      "Nasal Congestion (Cold / Flu)": {},
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
+    },
+    "By Distribution Channel": {
+      "Online Pharmacies": {},
+      "Retail Pharmacies": {},
+      "Hospital Pharmacies": {},
+      "Supermarkets & Hypermarkets": {}
+    },
+    "By End User": {
+      "Hospitals": {},
+      "ENT Clinics": {},
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
+    }
+  },
+  "Georgia": {
+    "By Prescription Type": {
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
+    },
+    "By Indication": {
+      "Infection Prevention / Antiviral": {},
+      "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
+      "Nasal Congestion (Cold / Flu)": {},
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
+    },
+    "By Distribution Channel": {
+      "Online Pharmacies": {},
+      "Retail Pharmacies": {},
+      "Hospital Pharmacies": {},
+      "Supermarkets & Hypermarkets": {}
+    },
+    "By End User": {
+      "Hospitals": {},
+      "ENT Clinics": {},
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
+    }
+  },
+  "Kentucky": {
+    "By Prescription Type": {
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
+    },
+    "By Indication": {
+      "Infection Prevention / Antiviral": {},
+      "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
+      "Nasal Congestion (Cold / Flu)": {},
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
+    },
+    "By Distribution Channel": {
+      "Online Pharmacies": {},
+      "Retail Pharmacies": {},
+      "Hospital Pharmacies": {},
+      "Supermarkets & Hypermarkets": {}
+    },
+    "By End User": {
+      "Hospitals": {},
+      "ENT Clinics": {},
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
+    }
+  },
+  "Louisiana": {
+    "By Prescription Type": {
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
+    },
+    "By Indication": {
+      "Infection Prevention / Antiviral": {},
+      "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
+      "Nasal Congestion (Cold / Flu)": {},
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
+    },
+    "By Distribution Channel": {
+      "Online Pharmacies": {},
+      "Retail Pharmacies": {},
+      "Hospital Pharmacies": {},
+      "Supermarkets & Hypermarkets": {}
+    },
+    "By End User": {
+      "Hospitals": {},
+      "ENT Clinics": {},
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
+    }
+  },
+  "Maryland": {
+    "By Prescription Type": {
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
+    },
+    "By Indication": {
+      "Infection Prevention / Antiviral": {},
+      "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
+      "Nasal Congestion (Cold / Flu)": {},
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
+    },
+    "By Distribution Channel": {
+      "Online Pharmacies": {},
+      "Retail Pharmacies": {},
+      "Hospital Pharmacies": {},
+      "Supermarkets & Hypermarkets": {}
+    },
+    "By End User": {
+      "Hospitals": {},
+      "ENT Clinics": {},
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
+    }
+  },
+  "Mississippi": {
+    "By Prescription Type": {
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
+    },
+    "By Indication": {
+      "Infection Prevention / Antiviral": {},
+      "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
+      "Nasal Congestion (Cold / Flu)": {},
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
+    },
+    "By Distribution Channel": {
+      "Online Pharmacies": {},
+      "Retail Pharmacies": {},
+      "Hospital Pharmacies": {},
+      "Supermarkets & Hypermarkets": {}
+    },
+    "By End User": {
+      "Hospitals": {},
+      "ENT Clinics": {},
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
+    }
+  },
+  "North Carolina": {
+    "By Prescription Type": {
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
+    },
+    "By Indication": {
+      "Infection Prevention / Antiviral": {},
+      "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
+      "Nasal Congestion (Cold / Flu)": {},
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
+    },
+    "By Distribution Channel": {
+      "Online Pharmacies": {},
+      "Retail Pharmacies": {},
+      "Hospital Pharmacies": {},
+      "Supermarkets & Hypermarkets": {}
+    },
+    "By End User": {
+      "Hospitals": {},
+      "ENT Clinics": {},
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
+    }
+  },
+  "Oklahoma": {
+    "By Prescription Type": {
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
+    },
+    "By Indication": {
+      "Infection Prevention / Antiviral": {},
+      "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
+      "Nasal Congestion (Cold / Flu)": {},
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
+    },
+    "By Distribution Channel": {
+      "Online Pharmacies": {},
+      "Retail Pharmacies": {},
+      "Hospital Pharmacies": {},
+      "Supermarkets & Hypermarkets": {}
+    },
+    "By End User": {
+      "Hospitals": {},
+      "ENT Clinics": {},
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
+    }
+  },
+  "South Carolina": {
+    "By Prescription Type": {
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
+    },
+    "By Indication": {
+      "Infection Prevention / Antiviral": {},
+      "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
+      "Nasal Congestion (Cold / Flu)": {},
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
+    },
+    "By Distribution Channel": {
+      "Online Pharmacies": {},
+      "Retail Pharmacies": {},
+      "Hospital Pharmacies": {},
+      "Supermarkets & Hypermarkets": {}
+    },
+    "By End User": {
+      "Hospitals": {},
+      "ENT Clinics": {},
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
+    }
+  },
+  "Tennessee": {
+    "By Prescription Type": {
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
+    },
+    "By Indication": {
+      "Infection Prevention / Antiviral": {},
+      "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
+      "Nasal Congestion (Cold / Flu)": {},
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
+    },
+    "By Distribution Channel": {
+      "Online Pharmacies": {},
+      "Retail Pharmacies": {},
+      "Hospital Pharmacies": {},
+      "Supermarkets & Hypermarkets": {}
+    },
+    "By End User": {
+      "Hospitals": {},
+      "ENT Clinics": {},
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
+    }
+  },
+  "Texas": {
+    "By Prescription Type": {
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
+    },
+    "By Indication": {
+      "Infection Prevention / Antiviral": {},
+      "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
+      "Nasal Congestion (Cold / Flu)": {},
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
+    },
+    "By Distribution Channel": {
+      "Online Pharmacies": {},
+      "Retail Pharmacies": {},
+      "Hospital Pharmacies": {},
+      "Supermarkets & Hypermarkets": {}
+    },
+    "By End User": {
+      "Hospitals": {},
+      "ENT Clinics": {},
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
+    }
+  },
+  "Virginia": {
+    "By Prescription Type": {
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
+    },
+    "By Indication": {
+      "Infection Prevention / Antiviral": {},
+      "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
+      "Nasal Congestion (Cold / Flu)": {},
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
+    },
+    "By Distribution Channel": {
+      "Online Pharmacies": {},
+      "Retail Pharmacies": {},
+      "Hospital Pharmacies": {},
+      "Supermarkets & Hypermarkets": {}
+    },
+    "By End User": {
+      "Hospitals": {},
+      "ENT Clinics": {},
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
+    }
+  },
+  "West Virginia": {
+    "By Prescription Type": {
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
+    },
+    "By Indication": {
+      "Infection Prevention / Antiviral": {},
+      "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
+      "Nasal Congestion (Cold / Flu)": {},
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
+    },
+    "By Distribution Channel": {
+      "Online Pharmacies": {},
+      "Retail Pharmacies": {},
+      "Hospital Pharmacies": {},
+      "Supermarkets & Hypermarkets": {}
+    },
+    "By End User": {
+      "Hospitals": {},
+      "ENT Clinics": {},
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
+    }
+  },
+  "Southwest": {
+    "By Prescription Type": {
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
+    },
+    "By Indication": {
+      "Infection Prevention / Antiviral": {},
+      "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
+      "Nasal Congestion (Cold / Flu)": {},
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
+    },
+    "By Distribution Channel": {
+      "Online Pharmacies": {},
+      "Retail Pharmacies": {},
+      "Hospital Pharmacies": {},
+      "Supermarkets & Hypermarkets": {}
+    },
+    "By End User": {
+      "Hospitals": {},
+      "ENT Clinics": {},
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
+    },
+    "By State": {
+      "Arizona": {},
+      "New Mexico": {}
+    }
+  },
+  "Arizona": {
+    "By Prescription Type": {
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
+    },
+    "By Indication": {
+      "Infection Prevention / Antiviral": {},
+      "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
+      "Nasal Congestion (Cold / Flu)": {},
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
+    },
+    "By Distribution Channel": {
+      "Online Pharmacies": {},
+      "Retail Pharmacies": {},
+      "Hospital Pharmacies": {},
+      "Supermarkets & Hypermarkets": {}
+    },
+    "By End User": {
+      "Hospitals": {},
+      "ENT Clinics": {},
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
+    }
+  },
+  "New Mexico": {
+    "By Prescription Type": {
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
+    },
+    "By Indication": {
+      "Infection Prevention / Antiviral": {},
+      "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
+      "Nasal Congestion (Cold / Flu)": {},
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
+    },
+    "By Distribution Channel": {
+      "Online Pharmacies": {},
+      "Retail Pharmacies": {},
+      "Hospital Pharmacies": {},
+      "Supermarkets & Hypermarkets": {}
+    },
+    "By End User": {
+      "Hospitals": {},
+      "ENT Clinics": {},
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
+    }
+  },
+  "West": {
+    "By Prescription Type": {
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
+    },
+    "By Indication": {
+      "Infection Prevention / Antiviral": {},
+      "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
+      "Nasal Congestion (Cold / Flu)": {},
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
+    },
+    "By Distribution Channel": {
+      "Online Pharmacies": {},
+      "Retail Pharmacies": {},
+      "Hospital Pharmacies": {},
+      "Supermarkets & Hypermarkets": {}
+    },
+    "By End User": {
+      "Hospitals": {},
+      "ENT Clinics": {},
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
+    },
+    "By State": {
+      "Alaska": {},
+      "California": {},
+      "Colorado": {},
+      "Hawaii": {},
+      "Idaho": {},
+      "Montana": {},
+      "Nevada": {},
+      "Oregon": {},
+      "Utah": {},
+      "Washington": {},
+      "Wyoming": {}
+    }
+  },
+  "Alaska": {
+    "By Prescription Type": {
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
+    },
+    "By Indication": {
+      "Infection Prevention / Antiviral": {},
+      "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
+      "Nasal Congestion (Cold / Flu)": {},
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
+    },
+    "By Distribution Channel": {
+      "Online Pharmacies": {},
+      "Retail Pharmacies": {},
+      "Hospital Pharmacies": {},
+      "Supermarkets & Hypermarkets": {}
+    },
+    "By End User": {
+      "Hospitals": {},
+      "ENT Clinics": {},
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
+    }
+  },
+  "California": {
+    "By Prescription Type": {
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
+    },
+    "By Indication": {
+      "Infection Prevention / Antiviral": {},
+      "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
+      "Nasal Congestion (Cold / Flu)": {},
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
+    },
+    "By Distribution Channel": {
+      "Online Pharmacies": {},
+      "Retail Pharmacies": {},
+      "Hospital Pharmacies": {},
+      "Supermarkets & Hypermarkets": {}
+    },
+    "By End User": {
+      "Hospitals": {},
+      "ENT Clinics": {},
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
+    }
+  },
+  "Colorado": {
+    "By Prescription Type": {
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
+    },
+    "By Indication": {
+      "Infection Prevention / Antiviral": {},
+      "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
+      "Nasal Congestion (Cold / Flu)": {},
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
+    },
+    "By Distribution Channel": {
+      "Online Pharmacies": {},
+      "Retail Pharmacies": {},
+      "Hospital Pharmacies": {},
+      "Supermarkets & Hypermarkets": {}
+    },
+    "By End User": {
+      "Hospitals": {},
+      "ENT Clinics": {},
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
+    }
+  },
+  "Hawaii": {
+    "By Prescription Type": {
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
+    },
+    "By Indication": {
+      "Infection Prevention / Antiviral": {},
+      "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
+      "Nasal Congestion (Cold / Flu)": {},
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
+    },
+    "By Distribution Channel": {
+      "Online Pharmacies": {},
+      "Retail Pharmacies": {},
+      "Hospital Pharmacies": {},
+      "Supermarkets & Hypermarkets": {}
+    },
+    "By End User": {
+      "Hospitals": {},
+      "ENT Clinics": {},
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
+    }
+  },
+  "Idaho": {
+    "By Prescription Type": {
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
+    },
+    "By Indication": {
+      "Infection Prevention / Antiviral": {},
+      "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
+      "Nasal Congestion (Cold / Flu)": {},
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
+    },
+    "By Distribution Channel": {
+      "Online Pharmacies": {},
+      "Retail Pharmacies": {},
+      "Hospital Pharmacies": {},
+      "Supermarkets & Hypermarkets": {}
+    },
+    "By End User": {
+      "Hospitals": {},
+      "ENT Clinics": {},
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
+    }
+  },
+  "Montana": {
+    "By Prescription Type": {
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
+    },
+    "By Indication": {
+      "Infection Prevention / Antiviral": {},
+      "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
+      "Nasal Congestion (Cold / Flu)": {},
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
+    },
+    "By Distribution Channel": {
+      "Online Pharmacies": {},
+      "Retail Pharmacies": {},
+      "Hospital Pharmacies": {},
+      "Supermarkets & Hypermarkets": {}
+    },
+    "By End User": {
+      "Hospitals": {},
+      "ENT Clinics": {},
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
+    }
+  },
+  "Nevada": {
+    "By Prescription Type": {
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
+    },
+    "By Indication": {
+      "Infection Prevention / Antiviral": {},
+      "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
+      "Nasal Congestion (Cold / Flu)": {},
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
+    },
+    "By Distribution Channel": {
+      "Online Pharmacies": {},
+      "Retail Pharmacies": {},
+      "Hospital Pharmacies": {},
+      "Supermarkets & Hypermarkets": {}
+    },
+    "By End User": {
+      "Hospitals": {},
+      "ENT Clinics": {},
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
+    }
+  },
+  "Oregon": {
+    "By Prescription Type": {
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
+    },
+    "By Indication": {
+      "Infection Prevention / Antiviral": {},
+      "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
+      "Nasal Congestion (Cold / Flu)": {},
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
+    },
+    "By Distribution Channel": {
+      "Online Pharmacies": {},
+      "Retail Pharmacies": {},
+      "Hospital Pharmacies": {},
+      "Supermarkets & Hypermarkets": {}
+    },
+    "By End User": {
+      "Hospitals": {},
+      "ENT Clinics": {},
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
+    }
+  },
+  "Utah": {
+    "By Prescription Type": {
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
+    },
+    "By Indication": {
+      "Infection Prevention / Antiviral": {},
+      "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
+      "Nasal Congestion (Cold / Flu)": {},
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
+    },
+    "By Distribution Channel": {
+      "Online Pharmacies": {},
+      "Retail Pharmacies": {},
+      "Hospital Pharmacies": {},
+      "Supermarkets & Hypermarkets": {}
+    },
+    "By End User": {
+      "Hospitals": {},
+      "ENT Clinics": {},
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
+    }
+  },
+  "Washington": {
+    "By Prescription Type": {
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
+    },
+    "By Indication": {
+      "Infection Prevention / Antiviral": {},
+      "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
+      "Nasal Congestion (Cold / Flu)": {},
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
+    },
+    "By Distribution Channel": {
+      "Online Pharmacies": {},
+      "Retail Pharmacies": {},
+      "Hospital Pharmacies": {},
+      "Supermarkets & Hypermarkets": {}
+    },
+    "By End User": {
+      "Hospitals": {},
+      "ENT Clinics": {},
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
+    }
+  },
+  "Wyoming": {
+    "By Prescription Type": {
+      "Rx (Prescription) Share": {},
+      "OTC (Over-the-Counter) Share": {}
+    },
+    "By Indication": {
+      "Infection Prevention / Antiviral": {},
+      "Chronic Rhinosinusitis / Sinusitis": {},
+      "Allergic Rhinitis": {},
+      "Nasal Congestion (Cold / Flu)": {},
+      "Non-Allergic Rhinitis": {},
+      "Other (Pre/Post-Op Antisepsis, etc.)": {}
+    },
+    "By Distribution Channel": {
+      "Online Pharmacies": {},
+      "Retail Pharmacies": {},
+      "Hospital Pharmacies": {},
+      "Supermarkets & Hypermarkets": {}
+    },
+    "By End User": {
+      "Hospitals": {},
+      "ENT Clinics": {},
+      "Ambulatory Surgical Centers": {},
+      "Others (Homecare, LTC, etc.)": {}
     }
   }
 }
