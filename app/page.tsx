@@ -204,7 +204,7 @@ export default function DashboardPage() {
                 Coherent Dashboard
               </h1>
               <h2 className="text-sm text-black">
-                {dashboardName || 'U.S. Povidone Iodine Market'}
+                {dashboardName || 'U.S. Povidone Iodine Nasal Spray Market'}
               </h2>
             </div>
           </div>

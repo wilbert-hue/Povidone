@@ -32,6 +32,9 @@ yarn-error.log*
 # Windows reserved names
 nul
 
+# MS Office / Excel temp lock files (never commit)
+~$*
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

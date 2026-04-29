@@ -1482,7 +1482,7 @@ export async function processJsonDataAsync(
     
     // Build metadata
     const metadata: Metadata = {
-      market_name: 'U.S. Povidone Iodine Nasal Spray Market',
+      market_name: 'Povidone Iodine Nasal Spray Market',
       market_type: 'Market Analysis',
       industry: 'Healthcare & Pharmaceuticals',
       years: allYears,
