@@ -15,7 +15,7 @@ import {
 import { CHART_THEME, getChartColor } from '@/lib/chart-theme'
 import { filterData, prepareWaterfallData } from '@/lib/data-processor'
 import { useDashboardStore } from '@/lib/store'
-import { formatMarketValueChartTitle, formatValueDataUnitLabel } from '@/lib/utils'
+import { formatMarketValueChartTitle, formatValueDataUnitLabel, getValueChartDisplayDivisor, formatCompactAxisTick } from '@/lib/utils'
 
 interface WaterfallChartProps {
   title?: string
@@ -92,7 +92,19 @@ export function WaterfallChart({ title, height = 400 }: WaterfallChartProps) {
     const totalChange = (processedData[processedData.length - 1]?.cumulative || 0) - 
                        (processedData[0]?.cumulative || 0)
 
-    return { data: processedData, totalChange }
+    const selectedCurrencyW = data.metadata.currency || 'USD'
+    const isINRW = selectedCurrencyW === 'INR'
+    const divisor = getValueChartDisplayDivisor(filters.dataType, isINRW, data.metadata.value_unit)
+    if (divisor !== 1) {
+      processedData.forEach(p => {
+        p.value /= divisor
+        if (p.cumulative !== undefined) p.cumulative /= divisor
+        if (p.start !== undefined) p.start /= divisor
+        if (p.end !== undefined) p.end /= divisor
+      })
+    }
+
+    return { data: processedData, totalChange: totalChange / divisor }
   }, [data, filters])
 
   if (!data || chartData.data.length === 0) {
@@ -288,6 +300,7 @@ export function WaterfallChart({ title, height = 400 }: WaterfallChartProps) {
           <YAxis
             tick={{ fontSize: 12 }}
             width={70}
+            tickFormatter={formatCompactAxisTick}
             label={{ value: yAxisLabel, angle: -90, position: 'insideLeft', style: { textAnchor: 'middle' }, dx: -10 }}
           />
           <Tooltip content={<CustomTooltip />} />

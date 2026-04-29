@@ -16,7 +16,7 @@ import { CHART_THEME, getChartColor } from '@/lib/chart-theme'
 import { filterData } from '@/lib/data-processor'
 import { useDashboardStore } from '@/lib/store'
 import type { DataRecord } from '@/lib/types'
-import { formatMarketValueChartTitle, formatValueDataUnitLabel, getCurrencySymbol } from '@/lib/utils'
+import { formatMarketValueChartTitle, formatValueDataUnitLabel, getCurrencySymbol, getValueChartDisplayDivisor } from '@/lib/utils'
 
 interface BubbleChartProps {
   title?: string
@@ -50,6 +50,10 @@ export function BubbleChart({ title, height = 500 }: BubbleChartProps) {
     const filtered = filterData(dataset, filters)
 
     if (filtered.length === 0) return { bubbles: [], xLabel: '', yLabel: '' }
+
+    const selectedCurrency = data.metadata.currency || 'USD'
+    const isINR = selectedCurrency === 'INR'
+    const valueDisplayDivisor = getValueChartDisplayDivisor(filters.dataType, isINR, data.metadata.value_unit)
 
     // Get the current year (end of range)
     const currentYear = filters.yearRange[1]
@@ -123,18 +127,19 @@ export function BubbleChart({ title, height = 500 }: BubbleChartProps) {
 
       // Only include points with valid data
       if (totalValue > 0 && !isNaN(marketShare) && !isNaN(calculatedCAGR)) {
+        const xDisplay = totalValue / valueDisplayDivisor
         bubbles.push({
           name: key,
-          x: totalValue, // Market Size (X-axis)
-          y: marketShare, // Market Share % (Y-axis - shows more variation)
-          z: Math.max(Math.abs(calculatedCAGR), 0.1), // CAGR (bubble size, minimum 0.1% for visibility)
+          x: xDisplay,
+          y: marketShare,
+          z: Math.max(Math.abs(calculatedCAGR), 0.1),
           geography,
           segment,
           segmentType,
-          currentValue: totalValue,
+          currentValue: xDisplay,
           cagr: calculatedCAGR,
           marketShare: marketShare,
-          absoluteGrowth: absoluteGrowth
+          absoluteGrowth: absoluteGrowth / valueDisplayDivisor
         })
       }
     })
@@ -142,8 +147,6 @@ export function BubbleChart({ title, height = 500 }: BubbleChartProps) {
     // Sort by market size for better visualization
     bubbles.sort((a, b) => b.x - a.x)
 
-    const selectedCurrency = data.metadata.currency || 'USD'
-    const isINR = selectedCurrency === 'INR'
     const currencySymbol = isINR ? '₹' : '$'
 
     const xLabel = filters.dataType === 'value'

@@ -99,6 +99,47 @@ export function isThousandsValueUnit(valueUnit: string | undefined): boolean {
 }
 
 /**
+ * Match KPI cards: stored values are full USD thousands; charts show ÷1000 for readability.
+ */
+export function getValueChartDisplayDivisor(
+  dataType: 'value' | 'volume',
+  isINR: boolean,
+  valueUnit: string | undefined,
+): number {
+  if (dataType !== 'value' || isINR) return 1
+  return isThousandsValueUnit(valueUnit) ? 1000 : 1
+}
+
+/**
+ * Scale Recharts row objects: divide numeric series keys, keep `year` (and other non-numeric) as-is.
+ */
+export function scaleChartDataPointsForDisplay<T extends Record<string, unknown>>(
+  data: T[],
+  divisor: number,
+  preserveKeys: Set<string> = new Set(['year']),
+): T[] {
+  if (divisor === 1 || data.length === 0) return data
+  return data.map((row) => {
+    const out = { ...row } as Record<string, unknown>
+    for (const key of Object.keys(out)) {
+      if (preserveKeys.has(key)) continue
+      const v = out[key]
+      if (typeof v === 'number' && Number.isFinite(v)) {
+        out[key] = v / divisor
+      }
+    }
+    return out as T
+  })
+}
+
+export function formatCompactAxisTick(value: number): string {
+  if (!Number.isFinite(value)) return ''
+  return Number.isInteger(value)
+    ? value.toLocaleString('en-US')
+    : value.toLocaleString('en-US', { maximumFractionDigits: 1, minimumFractionDigits: 0 })
+}
+
+/**
  * Chart axis title: e.g. Market size (Thousands) — not (USD Thousands).
  */
 export function formatMarketValueChartTitle(

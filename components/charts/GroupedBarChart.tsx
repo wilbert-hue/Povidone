@@ -15,7 +15,7 @@ import { CHART_THEME, getChartColor, CHART_COLORS } from '@/lib/chart-theme'
 import { filterData, prepareGroupedBarData, prepareIntelligentMultiLevelData, getUniqueGeographies, getUniqueSegments, getGeographyProportions } from '@/lib/data-processor'
 import { useDashboardStore } from '@/lib/store'
 import type { DataRecord } from '@/lib/types'
-import { formatMarketValueChartTitle, formatValueDataUnitLabel } from '@/lib/utils'
+import { formatMarketValueChartTitle, formatValueDataUnitLabel, getValueChartDisplayDivisor, scaleChartDataPointsForDisplay, formatCompactAxisTick } from '@/lib/utils'
 
 interface GroupedBarChartProps {
   title?: string
@@ -297,6 +297,19 @@ export function GroupedBarChart({ title, height = 400 }: GroupedBarChartProps) {
     return { data: prepared, series, stackedSeries, isStacked }
   }, [data, filters])
 
+  const selectedCurrencyEarly = currency || data?.metadata.currency || 'USD'
+  const isINREarly = selectedCurrencyEarly === 'INR'
+  const valueDisplayDivisor = data
+    ? getValueChartDisplayDivisor(filters.dataType, isINREarly, data.metadata.value_unit)
+    : 1
+
+  const displayChartData = useMemo(() => {
+    return scaleChartDataPointsForDisplay(
+      chartData.data as Record<string, unknown>[],
+      valueDisplayDivisor,
+    ) as typeof chartData.data
+  }, [chartData.data, valueDisplayDivisor])
+
   if (!data || chartData.data.length === 0) {
     return (
       <div className="flex items-center justify-center h-96 bg-gray-50 rounded-lg">
@@ -504,7 +517,7 @@ export function GroupedBarChart({ title, height = 400 }: GroupedBarChartProps) {
       
       <ResponsiveContainer width="100%" height={height}>
         <BarChart
-          data={chartData.data}
+          data={displayChartData}
           margin={{ top: 20, right: 30, left: 80, bottom: 20 }}
         >
           <CartesianGrid {...CHART_THEME.grid} />
@@ -516,6 +529,7 @@ export function GroupedBarChart({ title, height = 400 }: GroupedBarChartProps) {
           <YAxis
             tick={{ fontSize: 12 }}
             width={70}
+            tickFormatter={formatCompactAxisTick}
             label={{ value: yAxisLabel, angle: -90, position: 'insideLeft', style: { textAnchor: 'middle' }, dx: -10 }}
           />
           <Tooltip 
