@@ -4,7 +4,7 @@ import { useMemo, useState } from 'react'
 import { useDashboardStore } from '@/lib/store'
 import { filterData } from '@/lib/data-processor'
 import { ArrowUp, ArrowDown, Download } from 'lucide-react'
-import { formatValueDataUnitLabel, getCurrencySymbol } from '@/lib/utils'
+import { formatValueDataUnitLabel, getCurrencySymbol, getValueChartDisplayDivisor } from '@/lib/utils'
 
 interface ComparisonTableProps {
   title?: string
@@ -27,6 +27,10 @@ export function ComparisonTable({ title, height = 600 }: ComparisonTableProps) {
     // Filter data
     const filtered = filterData(dataset, filters)
 
+    const selectedCurrency = data.metadata.currency || 'USD'
+    const isINR = selectedCurrency === 'INR'
+    const valueDisplayDivisor = getValueChartDisplayDivisor(filters.dataType, isINR, data.metadata.value_unit)
+
     // Get the selected year (use base year or middle of range)
     const year = filters.yearRange[0] + Math.floor((filters.yearRange[1] - filters.yearRange[0]) / 2)
     const startYear = filters.yearRange[0]
@@ -44,14 +48,14 @@ export function ComparisonTable({ title, height = 600 }: ComparisonTableProps) {
       return 0
     }
 
-    // Transform to table format
+    // Transform to table format (value columns scaled for display when USD + Thousands)
     return filtered.map(record => ({
       geography: record.geography,
       segment: record.segment,
       segmentType: record.segment_type,
-      currentValue: record.time_series[year] || 0,
-      startValue: record.time_series[startYear] || 0,
-      endValue: record.time_series[endYear] || 0,
+      currentValue: (record.time_series[year] || 0) / valueDisplayDivisor,
+      startValue: (record.time_series[startYear] || 0) / valueDisplayDivisor,
+      endValue: (record.time_series[endYear] || 0) / valueDisplayDivisor,
       growth: record.time_series[startYear] > 0 
         ? (((record.time_series[endYear] || 0) - (record.time_series[startYear] || 0)) / record.time_series[startYear] * 100)
         : 0,
@@ -60,7 +64,7 @@ export function ComparisonTable({ title, height = 600 }: ComparisonTableProps) {
       sparkline: Object.entries(record.time_series)
         .filter(([y]) => parseInt(y) >= startYear && parseInt(y) <= endYear)
         .sort(([a], [b]) => parseInt(a) - parseInt(b))
-        .map(([, value]) => value)
+        .map(([, v]) => (v as number) / valueDisplayDivisor)
     }))
   }, [data, filters])
 

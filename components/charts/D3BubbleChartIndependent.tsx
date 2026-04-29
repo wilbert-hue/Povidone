@@ -11,7 +11,7 @@ import { CascadeFilter } from '@/components/filters/CascadeFilter'
 import { BusinessTypeFilter } from '@/components/filters/BusinessTypeFilter'
 import { Layers, ChevronDown, X, Tag, Plus } from 'lucide-react'
 import type { DataRecord } from '@/lib/types'
-import { formatValueDataUnitLabel } from '@/lib/utils'
+import { formatValueDataUnitLabel, getValueChartDisplayDivisor } from '@/lib/utils'
 
 // Wrapper components for opportunity matrix filters
 function OpportunityGeographyMultiSelect() {
@@ -407,6 +407,14 @@ export function D3BubbleChartIndependent({ title, height = 500 }: BubbleChartPro
       })
       return { bubbles: [], xLabel: '', yLabel: '', totalBubbles: 0 }
     }
+
+    const selectedCurrencyInd = data.metadata.currency || 'USD'
+    const isINRInd = selectedCurrencyInd === 'INR'
+    const valueDisplayDivisorIndep = getValueChartDisplayDivisor(
+      activeFilters.dataType,
+      isINRInd,
+      data.metadata.value_unit,
+    )
 
     // For opportunity mode: Simple Geography x Segment Type matrix using CAGR from JSON
     if (isOpportunityMode) {
@@ -909,10 +917,10 @@ export function D3BubbleChartIndependent({ title, height = 500 }: BubbleChartPro
           geography: record.geography,
           segment: segmentName || record.segment,
           segmentType: record.segment_type,
-          currentValue: value,
+          currentValue: value / valueDisplayDivisorIndep,
           cagr: cagr, // CAGR from JSON (parsed)
           marketShare: 0,
-          absoluteGrowth: absoluteGrowth,
+          absoluteGrowth: absoluteGrowth / valueDisplayDivisorIndep,
           color: getChartColor(index % 10),
           xIndex: cagrIndex,
           yIndex: valueIndex,
@@ -1163,10 +1171,10 @@ export function D3BubbleChartIndependent({ title, height = 500 }: BubbleChartPro
         geography: selectedGeography,
         segment: data.segment,
         segmentType: selectedSegmentType,
-        currentValue: data.forecastValue,
+        currentValue: data.forecastValue / valueDisplayDivisorIndep,
         cagr: data.cagr,                    // Store actual CAGR for tooltip
         marketShare: data.marketShare2023,   // Store actual market share for tooltip
-        absoluteGrowth: data.absoluteGrowth, // Store actual growth for tooltip
+        absoluteGrowth: data.absoluteGrowth / valueDisplayDivisorIndep, // Store display-scaled growth for tooltip
         color: getChartColor(data.index % 10),
         // Store index values separately
         xIndex: cagrIndex,                   // CAGR Index (0-100)

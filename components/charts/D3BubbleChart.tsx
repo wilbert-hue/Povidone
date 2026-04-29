@@ -6,7 +6,7 @@ import { filterData } from '@/lib/data-processor'
 import { useDashboardStore } from '@/lib/store'
 import { getChartColor } from '@/lib/chart-theme'
 import type { DataRecord } from '@/lib/types'
-import { formatMarketValueChartTitle, formatValueDataUnitLabel, getCurrencySymbol } from '@/lib/utils'
+import { formatMarketValueChartTitle, formatValueDataUnitLabel, getCurrencySymbol, getValueChartDisplayDivisor, formatCompactAxisTick } from '@/lib/utils'
 
 interface BubbleChartProps {
   title?: string
@@ -48,6 +48,10 @@ export function D3BubbleChart({ title, height = 500 }: BubbleChartProps) {
     const filtered = filterData(dataset, filters)
 
     if (filtered.length === 0) return { bubbles: [], xLabel: '', yLabel: '' }
+
+    const selectedCurrency = data.metadata.currency || 'USD'
+    const isINR = selectedCurrency === 'INR'
+    const valueDisplayDivisor = getValueChartDisplayDivisor(filters.dataType, isINR, data.metadata.value_unit)
 
     // Get the current year (end of range)
     const currentYear = filters.yearRange[1]
@@ -116,19 +120,20 @@ export function D3BubbleChart({ title, height = 500 }: BubbleChartProps) {
       // Only include points with valid data
       if (totalValue > 0 && !isNaN(marketShare) && !isNaN(calculatedCAGR)) {
         const index = bubbles.length
+        const xDisplay = totalValue / valueDisplayDivisor
         bubbles.push({
           name: key,
-          x: totalValue,
+          x: xDisplay,
           y: marketShare,
           z: Math.abs(calculatedCAGR),
           radius: 0, // Will be calculated later
           geography,
           segment,
           segmentType,
-          currentValue: totalValue,
+          currentValue: xDisplay,
           cagr: calculatedCAGR,
           marketShare: marketShare,
-          absoluteGrowth: absoluteGrowth,
+          absoluteGrowth: absoluteGrowth / valueDisplayDivisor,
           color: getChartColor(index % 10)
         })
       }
@@ -137,8 +142,6 @@ export function D3BubbleChart({ title, height = 500 }: BubbleChartProps) {
     // Sort by market size for better visualization
     bubbles.sort((a, b) => b.x - a.x)
 
-    const selectedCurrency = data.metadata.currency || 'USD'
-    const isINR = selectedCurrency === 'INR'
     const currencySymbol = isINR ? '₹' : '$'
 
     const xLabel = filters.dataType === 'value'
@@ -254,11 +257,7 @@ export function D3BubbleChart({ title, height = 500 }: BubbleChartProps) {
 
     // Add X axis
     const xAxis = d3.axisBottom(xScale)
-      .tickFormat(d => {
-        const value = d as number
-        if (value >= 1000) return `${(value / 1000).toFixed(1)}K`
-        return value.toFixed(0)
-      })
+      .tickFormat(d => formatCompactAxisTick(d as number))
 
     g.append('g')
       .attr('transform', `translate(0,${height - yPadding})`)

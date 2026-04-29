@@ -3,7 +3,7 @@
 import { useMemo, useState } from 'react'
 import { useDashboardStore } from '@/lib/store'
 import { filterData } from '@/lib/data-processor'
-import { formatValueDataUnitLabel, getCurrencySymbol } from '@/lib/utils'
+import { formatValueDataUnitLabel, getCurrencySymbol, getValueChartDisplayDivisor } from '@/lib/utils'
 
 interface MatrixHeatmapProps {
   title?: string
@@ -115,6 +115,19 @@ export function MatrixHeatmap({ title, height = 600 }: MatrixHeatmapProps) {
     })
 
     if (minValue === Infinity) minValue = 0
+
+    const selectedCurrencyM = data.metadata.currency || 'USD'
+    const isINRM = selectedCurrencyM === 'INR'
+    const displayDivisor = getValueChartDisplayDivisor(filters.dataType, isINRM, data.metadata.value_unit)
+    if (displayDivisor !== 1 && matrix.length > 0) {
+      for (let i = 0; i < matrix.length; i++) {
+        for (let j = 0; j < matrix[i].length; j++) {
+          matrix[i][j] /= displayDivisor
+        }
+      }
+      maxValue /= displayDivisor
+      minValue /= displayDivisor
+    }
 
     // Additional validation - ensure we have valid geographies and segments
     if (geographies.length === 0 || segments.length === 0) {
