@@ -25,7 +25,7 @@ export function ComparisonTable({ title, height = 600 }: ComparisonTableProps) {
       : data.data.volume.geography_segment_matrix
 
     // Filter data
-    const filtered = filterData(dataset, filters)
+    const filtered = filterData(dataset, filters, data.dimensions.geographies.countries)
 
     const selectedCurrency = data.metadata.currency || 'USD'
     const isINR = selectedCurrency === 'INR'

@@ -5,7 +5,11 @@ import * as d3 from 'd3'
 import { useDashboardStore } from '@/lib/store'
 import { getChartColor } from '@/lib/chart-theme'
 import { filterData } from '@/lib/data-processor'
-import { GeographyMultiSelect } from '@/components/filters/GeographyMultiSelect'
+import {
+  GeographyHierarchyList,
+  GeographyMultiSelect,
+  isUsNestedGeographyLayout,
+} from '@/components/filters/GeographyMultiSelect'
 import { AggregationLevelSelector } from '@/components/filters/AggregationLevelSelector'
 import { CascadeFilter } from '@/components/filters/CascadeFilter'
 import { BusinessTypeFilter } from '@/components/filters/BusinessTypeFilter'
@@ -36,13 +40,24 @@ function OpportunityGeographyMultiSelect() {
     }
   }, [isOpen])
 
-  const geographyOptions = useMemo(() => {
-    if (!data || !data.dimensions?.geographies) return []
-    const allGeographies = data.dimensions.geographies.all_geographies || []
-    if (!searchTerm) return allGeographies
-    const search = searchTerm.toLowerCase()
-    return allGeographies.filter(geo => geo.toLowerCase().includes(search))
-  }, [data, searchTerm])
+  const { useUsNestedTree, globalItems, regions, countries, flatOptions } = useMemo(() => {
+    if (!data?.dimensions?.geographies) {
+      return {
+        useUsNestedTree: false,
+        globalItems: [] as string[],
+        regions: [] as string[],
+        countries: {} as Record<string, string[]>,
+        flatOptions: [] as string[],
+      }
+    }
+    const geo = data.dimensions.geographies
+    const globalItems = geo.global || []
+    const regions = geo.regions || []
+    const countries = geo.countries || {}
+    const flatOptions = geo.all_geographies || []
+    const useUsNestedTree = isUsNestedGeographyLayout(globalItems, regions, countries)
+    return { useUsNestedTree, globalItems, regions, countries, flatOptions }
+  }, [data])
 
   if (shouldHide) return null
 
@@ -72,27 +87,56 @@ function OpportunityGeographyMultiSelect() {
               className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500 text-black"
             />
           </div>
-          <div className="p-2 space-y-1">
-            {geographyOptions.map(geo => {
-              const isSelected = opportunityFilters.geographies.includes(geo)
-              return (
-                <label key={geo} className="flex items-center space-x-2 cursor-pointer hover:bg-gray-50 p-1 rounded">
-                  <input
-                    type="checkbox"
-                    checked={isSelected}
-                    onChange={(e) => {
-                      const current = opportunityFilters.geographies
-                      const updated = e.target.checked
-                        ? [...current, geo]
-                        : current.filter(g => g !== geo)
-                      updateOpportunityFilters({ geographies: updated })
-                    }}
-                    className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                  />
-                  <span className="text-sm text-black">{geo}</span>
-                </label>
-              )
-            })}
+          <div className="p-2 space-y-1 max-h-60 overflow-y-auto">
+            {useUsNestedTree ? (
+              <GeographyHierarchyList
+                selected={opportunityFilters.geographies}
+                onToggle={geo => {
+                  const current = opportunityFilters.geographies
+                  const updated = current.includes(geo)
+                    ? current.filter(g => g !== geo)
+                    : [...current, geo]
+                  updateOpportunityFilters({ geographies: updated })
+                }}
+                globalItems={globalItems}
+                regions={regions}
+                countries={countries}
+                flatOptions={flatOptions}
+                searchTerm={searchTerm}
+              />
+            ) : (
+              (() => {
+                const allGeographies = flatOptions
+                const geographyOptions = !searchTerm
+                  ? allGeographies
+                  : allGeographies.filter(g => g.toLowerCase().includes(searchTerm.toLowerCase()))
+                if (geographyOptions.length === 0) {
+                  return (
+                    <div className="text-sm text-black text-center py-2">No geographies match</div>
+                  )
+                }
+                return geographyOptions.map(geo => {
+                  const isSelected = opportunityFilters.geographies.includes(geo)
+                  return (
+                    <label key={geo} className="flex items-center space-x-2 cursor-pointer hover:bg-gray-50 p-1 rounded">
+                      <input
+                        type="checkbox"
+                        checked={isSelected}
+                        onChange={(e) => {
+                          const current = opportunityFilters.geographies
+                          const updated = e.target.checked
+                            ? [...current, geo]
+                            : current.filter(g => g !== geo)
+                          updateOpportunityFilters({ geographies: updated })
+                        }}
+                        className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                      />
+                      <span className="text-sm text-black">{geo}</span>
+                    </label>
+                  )
+                })
+              })()
+            )}
           </div>
         </div>
       )}
@@ -473,7 +517,7 @@ export function D3BubbleChartIndependent({ title, height = 500 }: BubbleChartPro
       })
 
       // Use filterData to apply all filters consistently with other charts
-      let filteredRecords = filterData(dataset, activeFilters)
+      let filteredRecords = filterData(dataset, activeFilters, data.dimensions.geographies.countries)
 
       // Handle geography filtering for bubble chart
       // Check if data exists for selected geographies with the current segment type
@@ -797,7 +841,7 @@ export function D3BubbleChartIndependent({ title, height = 500 }: BubbleChartPro
         const uniqueAggregationLevels = [...new Set(dataset.map(r => r.aggregation_level).filter(l => l !== null && l !== undefined))]
         
         // Check what records exist after filterData
-        const afterFilterData = filterData(dataset, activeFilters)
+        const afterFilterData = filterData(dataset, activeFilters, data.dimensions.geographies.countries)
         
         const errorDetails = {
           datasetLength: dataset.length,
@@ -1012,7 +1056,7 @@ export function D3BubbleChartIndependent({ title, height = 500 }: BubbleChartPro
       ...activeFilters,
       geographies: [selectedGeography], // Use single geography for bubble chart
       advancedSegments: activeFilters.advancedSegments || [] as any
-    })
+    }, data.dimensions.geographies.countries)
 
     if (filteredRecords.length === 0) {
       return { bubbles: [], xLabel: '', yLabel: '', totalBubbles: 0 }

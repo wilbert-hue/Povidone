@@ -2,6 +2,7 @@ import { create } from 'zustand'
 import type { FilterState, ComparisonData } from './types'
 import type { ChartGroupId } from './chart-groups'
 import { DEFAULT_CHART_GROUP } from './chart-groups'
+import { repairUsMarketGeography } from './segment-type-options'
 
 interface DashboardStore {
   data: ComparisonData | null
@@ -187,8 +188,19 @@ export const useDashboardStore = create<DashboardStore>((set, get) => ({
   currency: 'USD',
   
   setData: (data) => {
-    const defaultFilters = getDefaultFilters(data)
-    const defaultOpportunityFilters = getDefaultOpportunityFilters(data)
+    const fixedGeo = repairUsMarketGeography(data.dimensions?.geographies)
+    const patched: ComparisonData = fixedGeo
+      ? {
+          ...data,
+          dimensions: {
+            ...data.dimensions,
+            geographies: fixedGeo,
+          },
+        }
+      : data
+
+    const defaultFilters = getDefaultFilters(patched)
+    const defaultOpportunityFilters = getDefaultOpportunityFilters(patched)
     
     // Preserve the current aggregation level when new data is uploaded
     // This allows users to keep their selected level when uploading new files
@@ -198,7 +210,7 @@ export const useDashboardStore = create<DashboardStore>((set, get) => ({
       : defaultFilters.aggregationLevel
     
     set({ 
-      data, 
+      data: patched, 
       filteredData: [], // Clear filtered data when new data is set
       error: null,
       filters: {

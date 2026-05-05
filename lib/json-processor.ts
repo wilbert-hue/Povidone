@@ -1279,17 +1279,25 @@ export async function processJsonDataAsync(
         if (byRegionData && typeof byRegionData === 'object') {
           // Extract region names (first level keys under "By Region")
           const regions = Object.keys(byRegionData).filter(key => {
+            if (/^\d{4}$/.test(key) || key === 'CAGR' || key === '_aggregated' || key === '_level') {
+              return false
+            }
             const value = byRegionData[key]
             return value && typeof value === 'object' && !Array.isArray(value)
           })
           regions.forEach(region => {
-            if (!regionGeographies.includes(region) && !geographies.includes(region)) {
+            // Track every region name from By Region even when it is already a top-level geography
+            // (U.S. census layout: Northeast…West appear both under United States and as top-level keys).
+            if (!regionGeographies.includes(region)) {
               regionGeographies.push(region)
             }
             // Extract countries under each region (second level keys, excluding the region name itself)
             const regionData = byRegionData[region]
             if (regionData && typeof regionData === 'object') {
               const countries = Object.keys(regionData).filter(key => {
+                if (/^\d{4}$/.test(key) || key === 'CAGR' || key === '_aggregated' || key === '_level') {
+                  return false
+                }
                 return key !== region && typeof regionData[key] === 'object' && !Array.isArray(regionData[key])
               })
               if (countries.length > 0) {
@@ -1306,14 +1314,51 @@ export async function processJsonDataAsync(
       }
     }
 
-    // Add regions and countries to geographies list
+    // U.S. (and similar) layouts: each census region is its own top-level geography with
+    // "By State" holding state leaf nodes, while totals live under the parent country
+    // (e.g. United States > By Region > Northeast). Link regions to states from those blocks.
+    for (const region of regionGeographies) {
+      if (regionToCountries[region]?.length) continue
+      const regionNode = structureData[region]
+      if (!regionNode || typeof regionNode !== 'object') continue
+      const byState = (regionNode as Record<string, unknown>)['By State']
+      if (!byState || typeof byState !== 'object' || Array.isArray(byState)) continue
+      const states = Object.keys(byState as object).filter(key => {
+        if (/^\d{4}$/.test(key) || key === 'CAGR' || key === '_aggregated' || key === '_level') {
+          return false
+        }
+        const val = (byState as Record<string, unknown>)[key]
+        return val !== null && typeof val === 'object' && !Array.isArray(val)
+      })
+      if (states.length === 0) continue
+      regionToCountries[region] = states
+      for (const state of states) {
+        if (!allCountries.includes(state)) {
+          allCountries.push(state)
+        }
+      }
+    }
+
+    // Add regions and countries to geographies list (dedupe — regions/states may already be top-level keys)
     if (regionGeographies.length > 0) {
       console.log(`Found ${regionGeographies.length} regions from "By Region":`, regionGeographies)
-      geographies = [...geographies, ...regionGeographies]
+      const geoSeen = new Set(geographies)
+      for (const r of regionGeographies) {
+        if (!geoSeen.has(r)) {
+          geographies.push(r)
+          geoSeen.add(r)
+        }
+      }
     }
     if (allCountries.length > 0) {
       console.log(`Found ${allCountries.length} countries from "By Region":`, allCountries)
-      geographies = [...geographies, ...allCountries]
+      const geoSeen = new Set(geographies)
+      for (const c of allCountries) {
+        if (!geoSeen.has(c)) {
+          geographies.push(c)
+          geoSeen.add(c)
+        }
+      }
     }
 
     console.log(`Found ${geographies.length} total geographies:`, geographies)
@@ -1478,6 +1523,35 @@ export async function processJsonDataAsync(
     calculateMarketShare(valueRecords, baseYear)
     if (volumeRecords.length > 0) {
       calculateMarketShare(volumeRecords, baseYear)
+    }
+
+    // US layout: "By Region" segments are census regions (totals under United States in the workbook)
+    if (regionGeographies.length > 0 && !segments['By Region']) {
+      segments['By Region'] = {
+        type: 'flat',
+        items: [...regionGeographies].sort((a, b) => a.localeCompare(b)),
+        hierarchy: {},
+      }
+    }
+
+    // Expose "By State" in segment filters when we have a region → states map (US census layout)
+    if (Object.keys(regionToCountries).length > 0) {
+      const stateSet = new Set<string>()
+      for (const sts of Object.values(regionToCountries)) {
+        for (const s of sts) {
+          if (s && !/^\d{4}$/.test(String(s))) {
+            stateSet.add(s)
+          }
+        }
+      }
+      if (stateSet.size > 0 && !segments['By State']) {
+        const items = Array.from(stateSet).sort((a, b) => a.localeCompare(b))
+        segments['By State'] = {
+          type: 'flat',
+          items,
+          hierarchy: {},
+        }
+      }
     }
     
     // Build metadata

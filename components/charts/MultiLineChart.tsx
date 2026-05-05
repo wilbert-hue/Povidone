@@ -31,7 +31,7 @@ export function MultiLineChart({ title, height = 400 }: MultiLineChartProps) {
       ? data.data.value.geography_segment_matrix
       : data.data.volume.geography_segment_matrix
 
-    const filtered = filterData(dataset, filters)
+    const filtered = filterData(dataset, filters, data.dimensions.geographies.countries)
 
     // Determine effective aggregation level for chart preparation
     // When no segments are selected for the current segment type, default to Level 2

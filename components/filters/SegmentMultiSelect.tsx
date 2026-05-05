@@ -2,12 +2,34 @@
 
 import { useState, useMemo, useEffect, useRef } from 'react'
 import { useDashboardStore } from '@/lib/store'
+import { getSegmentTypesForFilters, getEffectiveSegments, getCensusRegionsList, getUsRegionToStates } from '@/lib/segment-type-options'
+import type { SegmentDimension } from '@/lib/types'
 import { Check, ChevronDown } from 'lucide-react'
 
 export function SegmentMultiSelect() {
   const { data, filters, updateFilters } = useDashboardStore()
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
+
+  const segmentsEffective = useMemo(() => {
+    if (!data?.dimensions?.segments || !data?.dimensions?.geographies) {
+      return (data?.dimensions?.segments ?? {}) as Record<string, SegmentDimension>
+    }
+    return getEffectiveSegments(data.dimensions.segments, data.dimensions.geographies)
+  }, [data])
+
+  const segmentTypes = useMemo(
+    () => getSegmentTypesForFilters(segmentsEffective, filters.geographies, data?.dimensions?.geographies),
+    [segmentsEffective, filters.geographies, data?.dimensions?.geographies]
+  )
+
+  useEffect(() => {
+    if (segmentTypes.length === 0) return
+    if (!segmentTypes.includes(filters.segmentType)) {
+      const next = segmentTypes[0]
+      updateFilters({ segmentType: next, segments: [] })
+    }
+  }, [segmentTypes, filters.segmentType, updateFilters])
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -29,7 +51,7 @@ export function SegmentMultiSelect() {
   const segmentOptions = useMemo(() => {
     if (!data || !filters.segmentType) return []
     
-    const segmentDimension = data.dimensions.segments[filters.segmentType]
+    const segmentDimension = segmentsEffective[filters.segmentType]
     
     // Check if this segment type has B2B/B2C segmentation
     const hasB2BSegmentation = segmentDimension && (
@@ -92,6 +114,24 @@ export function SegmentMultiSelect() {
       }
     } else {
       items = segmentDimension?.items || []
+    }
+
+    if (filters.segmentType === 'By State' && data?.dimensions?.geographies) {
+      const censusRegionsList = getCensusRegionsList(data.dimensions.geographies)
+      const regionToStates = getUsRegionToStates(data.dimensions.geographies)
+      const selectedRegions = filters.geographies.filter(g => censusRegionsList.includes(g))
+      if (selectedRegions.length > 0) {
+        const allow = new Set<string>()
+        selectedRegions.forEach(r => (regionToStates[r] || []).forEach(s => allow.add(s)))
+        items = items.filter(s => allow.has(s))
+      } else {
+        const allStateNames = new Set(Object.values(regionToStates).flat())
+        const selectedStates = filters.geographies.filter(g => allStateNames.has(g))
+        if (selectedStates.length > 0) {
+          const allow = new Set(selectedStates)
+          items = items.filter(s => allow.has(s))
+        }
+      }
     }
     
     // Build hierarchical structure with indentation levels
@@ -169,7 +209,7 @@ export function SegmentMultiSelect() {
     }
     
     return structuredSegments
-  }, [data, filters.segmentType, filters.businessType])
+  }, [data, filters.segmentType, filters.businessType, filters.geographies, segmentsEffective])
 
   const handleToggle = (segment: string) => {
     const current = filters.segments
@@ -198,9 +238,6 @@ export function SegmentMultiSelect() {
   if (!data) return null
 
   const selectedCount = filters.segments.length
-  // Get all available segment types
-  const allSegmentTypes = Object.keys(data.dimensions.segments)
-  const segmentTypes = allSegmentTypes
 
   return (
     <div className="space-y-4" ref={dropdownRef}>

@@ -76,7 +76,7 @@ export function GroupedBarChart({ title, height = 400 }: GroupedBarChartProps) {
     }
 
     // Filter data with the correct effective aggregation level
-    let filtered = filterData(dataset, modifiedFilters)
+    let filtered = filterData(dataset, modifiedFilters, data.dimensions.geographies.countries)
 
     // If showLevel1Totals is enabled in geography mode, also include Level 1 aggregated records
     if (filters.viewMode === 'geography-mode' && filters.showLevel1Totals) {

@@ -45,7 +45,7 @@ export function D3BubbleChart({ title, height = 500 }: BubbleChartProps) {
       ? data.data.value.geography_segment_matrix
       : data.data.volume.geography_segment_matrix
 
-    const filtered = filterData(dataset, filters)
+    const filtered = filterData(dataset, filters, data.dimensions.geographies.countries)
 
     if (filtered.length === 0) return { bubbles: [], xLabel: '', yLabel: '' }
 

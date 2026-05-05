@@ -16,7 +16,7 @@ export function InsightsPanel() {
       ? data.data.value.geography_segment_matrix
       : data.data.volume.geography_segment_matrix
 
-    const filtered = filterData(dataset, filters)
+    const filtered = filterData(dataset, filters, data.dimensions.geographies.countries)
     
     // Generate main insights
     const mainInsights = generateInsights(filtered, filters, currency || 'USD', data.metadata.volume_unit || 'Million Units')

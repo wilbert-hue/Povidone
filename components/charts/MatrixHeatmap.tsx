@@ -23,7 +23,7 @@ export function MatrixHeatmap({ title, height = 600 }: MatrixHeatmapProps) {
       : data.data.volume.geography_segment_matrix
 
     // Filter data
-    const filtered = filterData(dataset, filters)
+    const filtered = filterData(dataset, filters, data.dimensions.geographies.countries)
 
     // Check if we need Global-to-regional mapping
     const regionalGeographies = ['North America', 'Europe', 'Asia Pacific', 'Latin America', 'Middle East & Africa', 'Middle East', 'Africa', 'ASEAN', 'SAARC Region', 'CIS Region']

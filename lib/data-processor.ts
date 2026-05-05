@@ -234,14 +234,22 @@ export function filterData(
     // In geography mode, when a parent geography is selected (e.g., "North America"),
     // also include records from child geographies (e.g., "U.S.", "Canada")
 
-    // SPECIAL CASE: For regional segment types ("By Region", "By State", "By Country"),
-    // skip the geography filter entirely because:
-    // - "By Region" data exists under regional geographies (North America, Europe, etc.), NOT under Global
-    // - The segments themselves ARE the geographical breakdown (e.g., U.S. under North America > By Region)
-    // - Filtering by geography would incorrectly exclude all records when "Global" is selected
-    let geoMatch = filters.geographies.length === 0 ||
+    // Geography filter: By Region / By Country skip geo (segments carry geography);
+    // By State uses normal geo matching so selecting "Northeast" limits to its states' records.
+    const skipGeoFilterForRegionOrCountry =
+      filters.segmentType === 'By Region' || filters.segmentType === 'By Country'
+
+    let geoMatch =
+      filters.geographies.length === 0 ||
       filters.geographies.includes(record.geography) ||
-      isRegionalSegmentType // Skip geography filter for regional segment types
+      skipGeoFilterForRegionOrCountry
+
+    if (filters.segmentType === 'By State' && filters.geographies.length > 0) {
+      const map = geographyCountries || {}
+      geoMatch =
+        filters.geographies.includes(record.geography) ||
+        filters.geographies.some(sel => (map[sel] ?? []).includes(record.geography))
+    }
 
     // Also match if the record's parent geography is in the selected list
     // This allows selecting "North America" to include U.S., Canada records

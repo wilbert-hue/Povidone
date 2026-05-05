@@ -1,12 +1,14 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { useDashboardStore } from '@/lib/store'
-import { GeographyMultiSelect } from './GeographyMultiSelect'
+import { GeographyMultiSelect, geographyParentDisplayLabel } from './GeographyMultiSelect'
 import { BusinessTypeFilter } from './BusinessTypeFilter'
 import { YearRangeSlider } from './YearRangeSlider'
 import { AggregationLevelSelector } from './AggregationLevelSelector'
 import { CascadeFilter } from './CascadeFilter'
+import { getSegmentTypesForFilters, getEffectiveSegments, getCensusRegionsList, getUsRegionToStates } from '@/lib/segment-type-options'
+import type { SegmentDimension } from '@/lib/types'
 import { X, Plus, MapPin, Tag } from 'lucide-react'
 
 interface SelectedSegmentItem {
@@ -23,6 +25,34 @@ export function EnhancedFilterPanel() {
   const [selectedSegments, setSelectedSegments] = useState<SelectedSegmentItem[]>([])
   const [currentSegmentSelection, setCurrentSegmentSelection] = useState<string>('')
   const [cascadePath, setCascadePath] = useState<string[]>([])
+
+  const segmentsEffective = useMemo(() => {
+    if (!data?.dimensions?.segments || !data?.dimensions?.geographies) {
+      return (data?.dimensions?.segments ?? {}) as Record<string, SegmentDimension>
+    }
+    return getEffectiveSegments(data.dimensions.segments, data.dimensions.geographies)
+  }, [data])
+
+  const segmentTypesForUi = useMemo(
+    () => getSegmentTypesForFilters(segmentsEffective, filters.geographies, data?.dimensions?.geographies),
+    [segmentsEffective, filters.geographies, data?.dimensions?.geographies]
+  )
+
+  useEffect(() => {
+    if (segmentTypesForUi.length === 0) return
+    if (!segmentTypesForUi.includes(selectedSegmentType)) {
+      const next = segmentTypesForUi[0]
+      setSelectedSegmentType(next)
+      setSelectedSegments([])
+      setCascadePath([])
+      setCurrentSegmentSelection('')
+      updateFilters({
+        segmentType: next,
+        segments: [],
+        advancedSegments: [],
+      })
+    }
+  }, [segmentTypesForUi, selectedSegmentType, updateFilters])
 
   // Initialize selectedSegments from store filters when data loads
   useEffect(() => {
@@ -60,7 +90,7 @@ export function EnhancedFilterPanel() {
   }, [filters.segmentType, data])
 
   // Clear selected segments when business type changes and segment type has B2B/B2C
-  const segmentDimension = data?.dimensions?.segments?.[selectedSegmentType]
+  const segmentDimension = segmentsEffective[selectedSegmentType]
   const hasB2BSegmentation = segmentDimension && (
     (segmentDimension.b2b_hierarchy && Object.keys(segmentDimension.b2b_hierarchy).length > 0) ||
     (segmentDimension.b2c_hierarchy && Object.keys(segmentDimension.b2c_hierarchy).length > 0) ||
@@ -143,6 +173,24 @@ export function EnhancedFilterPanel() {
         }
       })
       availableSegments = Array.from(allSegmentsFromHierarchy)
+    }
+  }
+
+  if (selectedSegmentType === 'By State' && data?.dimensions?.geographies) {
+    const censusRegionsList = getCensusRegionsList(data.dimensions.geographies)
+    const regionToStates = getUsRegionToStates(data.dimensions.geographies)
+    const selectedRegions = filters.geographies.filter(g => censusRegionsList.includes(g))
+    if (selectedRegions.length > 0) {
+      const allow = new Set<string>()
+      selectedRegions.forEach(r => (regionToStates[r] || []).forEach(s => allow.add(s)))
+      availableSegments = availableSegments.filter(s => allow.has(s))
+    } else {
+      const allStateNames = new Set(Object.values(regionToStates).flat())
+      const selectedStates = filters.geographies.filter(g => allStateNames.has(g))
+      if (selectedStates.length > 0) {
+        const allow = new Set(selectedStates)
+        availableSegments = availableSegments.filter(s => allow.has(s))
+      }
     }
   }
   
@@ -240,7 +288,7 @@ export function EnhancedFilterPanel() {
 
   if (!data) return null
 
-  const segmentTypes = Object.keys(data.dimensions.segments)
+  const segmentTypes = segmentTypesForUi
 
   return (
     <div className="bg-white rounded-lg shadow-sm p-2.5 space-y-2">
@@ -288,7 +336,7 @@ export function EnhancedFilterPanel() {
                   key={geo}
                   className="inline-flex items-center px-1.5 py-0.5 text-xs bg-white text-blue-800 rounded border border-blue-200"
                 >
-                  {geo}
+                  {geographyParentDisplayLabel(geo)}
                   <button
                     onClick={() => handleRemoveGeography(geo)}
                     className="ml-1 hover:text-blue-900"
@@ -344,6 +392,16 @@ export function EnhancedFilterPanel() {
           <label className="block text-xs text-black mb-1">
             Step 2: Select Segment from {selectedSegmentType}
           </label>
+          {selectedSegmentType === 'By State' && (
+            <p className="text-xs text-black mb-1">
+              States listed match the workbook for the census region(s) you selected (e.g. Northeast → New York, New Jersey, Connecticut, …). Select <strong>US</strong> in Geography to choose the <strong>By Region</strong> segment type.
+            </p>
+          )}
+          {selectedSegmentType === 'By Region' && (
+            <p className="text-xs text-black mb-1">
+              Select <strong>United States (US)</strong> in Geography to compare census regions (Northeast, Midwest, South, Southwest, West) from the file.
+            </p>
+          )}
           {Object.keys(hierarchy).length === 0 && availableSegments.length === 0 ? (
             <div className="w-full px-3 py-2 border border-yellow-300 rounded-md mb-2 bg-yellow-50 text-yellow-800 text-sm">
               ⚠️ No segments available for this segment type. Please check your data structure.
